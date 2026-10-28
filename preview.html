@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>谱面 AI · 管线验证</title>
+<style>
+  :root{--bg:#06070d;--ink:#e8f2ff;--dim:#7d90ad;--line:rgba(90,150,220,.25);--cyan:#38e8ff;--pink:#ff4fd8}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font:13px/1.7 system-ui,-apple-system,"PingFang SC",sans-serif;overflow:hidden}
+  #stage{position:fixed;inset:0 0 150px 0}
+  .panel{position:fixed;left:0;right:0;bottom:0;height:150px;border-top:1px solid var(--line);
+    background:rgba(10,17,32,.95);backdrop-filter:blur(14px);padding:12px 20px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  button{appearance:none;border:1px solid var(--line);background:#101a2c;color:var(--ink);
+    height:30px;padding:0 13px;border-radius:8px;cursor:pointer;font-size:12px}
+  button.on{border-color:rgba(56,232,255,.7);color:var(--cyan);background:rgba(56,232,255,.1)}
+  button:hover{border-color:rgba(56,232,255,.5)}
+  .stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;font-size:11.5px}
+  .stat div{border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:rgba(8,14,26,.7)}
+  .stat b{display:block;color:var(--dim);font-weight:400;font-size:10.5px;letter-spacing:.04em}
+  .stat span{font-size:14px;color:var(--cyan);font-variant-numeric:tabular-nums}
+  .stat span.warn{color:#ffc23d}
+  .hint{color:var(--dim);font-size:11px;margin-left:auto}
+  .top{position:fixed;left:16px;top:14px;font-size:12px;line-height:1.9;pointer-events:none;color:var(--dim)}
+  .top b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="top" id="top">加载中…</div>
+
+<div class="panel">
+  <div class="row">
+    <button id="btnSrc" class="on">原始谱面</button>
+    <button id="btnGen">模型生成</button>
+    <button id="btnNew">换一个种子</button>
+    <span class="hint" id="hint">bigram 基线 · 不是真模型，只用来验证 token 表示是否可学</span>
+  </div>
+  <div class="stat" id="stat"></div>
+</div>
+
+<script src="../01-app/osu-skin.js"></script>
+<script src="../01-app/scene3d.js"></script>
+<script src="src/chart-tokenizer.js"></script>
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var statEl = document.getElementById('stat');
+  var topEl = document.getElementById('top');
+  var hintEl = document.getElementById('hint');
+
+  var ctrl = null;
+  var dataset = [];
+  var model = null;
+  var srcChart = null;     // 原始谱（第一个 4K 样本）
+  var genChart = null;     // 生成谱
+  var seed = 7;
+  var mode = 'src';
+
+  function fmtMs(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+
+  /* ---------- 1. 载入数据集 ---------- */
+  fetch('out/dataset.jsonl')
+    .then(function (r) { return r.text(); })
+    .then(function (txt) {
+      var lines = txt.split('\n').filter(Boolean);
+      dataset = lines.map(function (l) { return JSON.parse(l); });
+      var fourK = dataset.filter(function (d) { return d.keys === 4; });
+      topEl.innerHTML = '数据集 <b>' + dataset.length + '</b> 个样本 / ' +
+        dataset.reduce(function (a, d) { return a + d.frames; }, 0).toLocaleString() + ' 帧<br>' +
+        '其中 4K <b>' + fourK.length + '</b> 个，用于训练基线';
+
+      // 训练 bigram
+      model = ChartTokenizer.createBigram(4);
+      fourK.forEach(function (d) { model.learn(d.tokens); });
+
+      // 取第一个 4K 样本当"原谱"
+      var s = fourK[0];
+      srcChart = {
+        keys: s.keys, bpm: s.bpm, totalTime: s.frames * s.stepMs,
+        notes: ChartTokenizer.detokenize(s.tokens, { keys: s.keys, stepMs: s.stepMs, holds: s.holds }),
+        metadata: { title: s.meta.title || s.id, artist: 'dataset', version: '原始 ' + s.keys + 'K' },
+        _tokens: s.tokens, _step: s.stepMs
+      };
+
+      generate(seed);
+      show('src');
+    })
+    .catch(function (e) {
+      topEl.textContent = '数据集加载失败：' + e.message + '（先在 06-chart-ai 目录跑 build-dataset.mjs）';
+    });
+
+  /* ---------- 2. 生成 ---------- */
+  function generate(sd) {
+    if (!model) return;
+    var frames = srcChart._tokens.length;
+    var seq = model.sample(frames, { rng: ChartTokenizer.makeRng(sd) });
+    var notes = ChartTokenizer.detokenize(seq, { keys: 4, stepMs: srcChart._step });
+    genChart = {
+      keys: 4, bpm: srcChart.bpm, totalTime: frames * srcChart._step,
+      notes: notes,
+      metadata: { title: '生成样本 seed=' + sd, artist: 'bigram', version: '生成 4K' },
+      _tokens: seq, _step: srcChart._step
+    };
+  }
+
+  /* ---------- 3. 渲染 ---------- */
+  function show(which) {
+    mode = which;
+    var chart = which === 'src' ? srcChart : genChart;
+    if (!chart) return;
+    if (ctrl) { ctrl.dispose(); ctrl = null; }
+    document.getElementById('btnSrc').classList.toggle('on', which === 'src');
+    document.getElementById('btnGen').classList.toggle('on', which === 'gen');
+
+    Scene3D.mount(stage, chart, { autoRotate: false, tilt: true, bloom: true, loop: true })
+      .then(function (c) {
+        ctrl = c;
+        c.play();
+        paintStats(chart, which);
+      })
+      .catch(function (e) { topEl.textContent = '渲染失败：' + e.message; });
+  }
+
+  /* ---------- 4. 指标对比 ---------- */
+  function metricsOf(chart) {
+    var p = ChartTokenizer.profile(chart._tokens, chart.keys);
+    var d = p.density;
+    var mean = d.reduce(function (a, b) { return a + b; }, 0) / (d.length || 1);
+    var varr = d.reduce(function (a, b) { return a + (b - mean) * (b - mean); }, 0) / (d.length || 1);
+    var laneMean = p.lanes.reduce(function (a, b) { return a + b; }, 0) / p.lanes.length;
+    var laneSkew = Math.max.apply(null, p.lanes.map(function (x) { return Math.abs(x - laneMean) / (laneMean || 1); }));
+    return {
+      notes: p.notes, frames: p.frames, occupancy: p.occupancy,
+      chord: p.chord, lanes: p.lanes,
+      densityMean: mean, densityStd: Math.sqrt(varr), laneSkew: laneSkew
+    };
+  }
+
+  function paintStats(chart, which) {
+    var m = metricsOf(chart);
+    var s = srcChart ? metricsOf(srcChart) : null;
+    var sq = genChart ? metricsOf(genChart) : null;
+
+    function cell(label, v, ref, better) {
+      var cls = '';
+      if (ref != null) {
+        var diff = Math.abs(v - ref) / (ref || 1);
+        if (diff > 0.35) cls = 'warn';
+      }
+      return '<div><b>' + label + '</b><span class="' + cls + '">' + v + '</span></div>';
+    }
+
+    var html = '';
+    html += cell('notes', m.notes, s && s.notes);
+    html += cell('总帧', m.frames, s && s.frames);
+    html += cell('占用率', m.occupancy.toFixed(3), s && s.occupancy);
+    html += cell('密度均值', m.densityMean.toFixed(2), s && s.densityMean);
+    html += cell('密度波动', m.densityStd.toFixed(2), s && s.densityStd);
+    html += cell('列偏移', m.laneSkew.toFixed(2), null);
+    html += '<div><b>单押/双押/三押</b><span>' +
+      m.chord[1] + ' / ' + m.chord[2] + ' / ' + m.chord[3] + '</span></div>';
+    statEl.innerHTML = html;
+
+    hintEl.textContent = which === 'gen'
+      ? '生成结果：能出结构，但列分布偏斜、缺少段落起伏 —— 这正是真模型要学的部分'
+      : '原始谱面：数据集里的真实样本，作为对照';
+  }
+
+  /* ---------- 5. 交互 ---------- */
+  document.getElementById('btnSrc').addEventListener('click', function () { show('src'); });
+  document.getElementById('btnGen').addEventListener('click', function () {
+    if (!genChart) return;
+    show('gen');
+  });
+  document.getElementById('btnNew').addEventListener('click', function () {
+    seed = (seed * 7919 + 13) % 100000;
+    generate(seed);
+    if (mode === 'gen') show('gen');
+    else paintStats(srcChart, 'src');
+  });
+
+  window.__ai = {
+    get charts() { return { src: srcChart, gen: genChart }; },
+    get ctrl() { return ctrl; },
+    gen: generate,
+    show: show
+  };
+})();
+</script>
+</body>
+</html>
