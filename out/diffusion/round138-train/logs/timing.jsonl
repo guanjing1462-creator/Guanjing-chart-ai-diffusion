@@ -1,0 +1,1 @@
+{"epoch": 1, "train": 0.10050200164318085, "val": 0.0828903677510978, "sec": 196.7, "batches": 250, "ms_per_batch": 770, "train_windows": 8000, "lr": 0.0}

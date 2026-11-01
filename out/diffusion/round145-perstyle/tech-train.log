@@ -1,0 +1,35 @@
+按风格分模型：style=0（tech）；模型内不含 style 嵌入，风格由这份权重本身承载
+线程 1（internop 1）
+数据 out/diff-data-grouped/dataset.npz：95574 窗口 × 4键 × 256 行（64 格的 mid 层）
+按风格过滤：train 14818 窗 / val 1062 窗（style==0）；test 不碰
+连续难度条件（占位率，train 拟合）：0.065–0.309 → [0,1]；train 均值 0.519 / val 均值 0.502
+组规模（train）：26 组，最大 4527 窗 / 中位 203 窗 / 最小 26 窗；前 3 组占 54% 窗口
+split 口径（tech 内）：train = split==0 → 14818 窗 / 478 谱 / 26 组；val = split==1 → 1062 窗 / 40 谱 / 4 组；test 不碰
+每个 epoch 从 train 无放回抽 4000 窗（共 14818）；val 用完整 1062 窗（不抽）
+  风格分布（过滤后必须单峰）train [14818, 0, 0, 0]  val [1062, 0, 0, 0]
+  连续难度 [train min 0.00 max 1.00 均值 0.52] [val 均值 0.50]
+初始种子 0（配对实验用）
+模型：无 style 嵌入（模型身份 = tech），条件 = t + 连续难度 Fourier
+参数量 0.439M（cond_dim=0）
+邻接加权 adj_weight=0.0 scope=lane：val 正样本里成对格占 0.1%，全格平均损失权重 1.000（1.000 = 未加权 MSE）
+  本 epoch 抽到 4000 窗，覆盖 26 组，单组最多 242 窗（上限 300）；对照组规模最大 4527 窗
+epoch 1: 训练 0.1187  验证 0.1005（组均 0.1017）  用时 81s（63 batch，881ms/batch）
+  ↳ 保存最优（验证 0.1005）→ out/diffusion/round145-perstyle/tech.pt
+epoch 2: 训练 0.0963  验证 0.0936（组均 0.0948）  用时 88s（63 batch，1330ms/batch）
+  ↳ 保存最优（验证 0.0936）→ out/diffusion/round145-perstyle/tech.pt
+epoch 3: 训练 0.0924  验证 0.0906（组均 0.0918）  用时 83s（63 batch，1307ms/batch）
+  ↳ 保存最优（验证 0.0906）→ out/diffusion/round145-perstyle/tech.pt
+epoch 4: 训练 0.0887  验证 0.0874（组均 0.0887）  用时 82s（63 batch，1148ms/batch）
+  ↳ 保存最优（验证 0.0874）→ out/diffusion/round145-perstyle/tech.pt
+epoch 5: 训练 0.0871  验证 0.0862（组均 0.0875）  用时 78s（63 batch，1359ms/batch）
+  ↳ 保存最优（验证 0.0862）→ out/diffusion/round145-perstyle/tech.pt
+epoch 6: 训练 0.0862  验证 0.0854（组均 0.0867）  用时 85s（63 batch，1507ms/batch）
+  ↳ 保存最优（验证 0.0854）→ out/diffusion/round145-perstyle/tech.pt
+epoch 7: 训练 0.0865  验证 0.0850（组均 0.0864）  用时 78s（63 batch，1142ms/batch）
+  ↳ 保存最优（验证 0.0850）→ out/diffusion/round145-perstyle/tech.pt
+epoch 8: 训练 0.0863  验证 0.0849（组均 0.0862）  用时 78s（63 batch，1175ms/batch）
+  ↳ 保存最优（验证 0.0849）→ out/diffusion/round145-perstyle/tech.pt
+epoch 9: 训练 0.0843  验证 0.0847（组均 0.0861）  用时 87s（63 batch，1199ms/batch）
+  ↳ 保存最优（验证 0.0847）→ out/diffusion/round145-perstyle/tech.pt
+末轮权重（未被 val 选过，无选择偏差）→ out/diffusion/round145-perstyle/tech-last.pt
+完成，最优验证损失 0.0847（epoch 9），总用时 740s

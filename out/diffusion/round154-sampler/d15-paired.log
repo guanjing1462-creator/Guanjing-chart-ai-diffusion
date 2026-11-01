@@ -1,0 +1,37 @@
+▶ 采样：style=0 diff=0.15 num=6 T=200 base=48 参数 0.46M
+  权重：out/models/r153-S1-multi.pt
+  1/32 格 = 55.03 ms（bpm 136.3），窗口 256 格 = 14.09s
+  音频条件（mel 32 带）：Heart-Fraction-mel.npz [T=3570,32] 起始格 0，6 窗连续；通道均值前8 [0.1766, 0.1645, 0.1686, 0.1485, 0.1685, 0.1327, 0.1385, 0.1623]
+
+=== 采样统计 ===
+  窗口数: 6
+  占位率: 0.0871
+  非空行比例: 0.2956
+  每行平均音符数: 0.348
+  非空行平均和弦: 1.178
+  最大和弦: 3
+  各列占位率: [0.0697, 0.0977, 0.0996, 0.0814]
+  每窗口音符数: [89, 80, 94, 98, 78, 96]
+  1/32占比_p132: 0.0714
+  半格内容_off_parity: 0.1344
+  每窗口时长_s: 14.087
+  音符密度_nps: 6.33
+  行密度_rps: 5.372
+  原始概率: {'均值': 0.1271, '标准差': 0.3234, '最小': -0.4871, '最大': 2.0, 'q10': -0.0876, 'q50': 0.0336, 'q90': 0.4334}
+  耗时_s: 29.48
+  每窗口耗时_s: 4.91
+  扩散步数: 200
+  阈值: 0.5
+
+写出 6 个 [4,256] 钢琴卷 → out/diffusion/round154-sampler/d15-paired/roll-s0d0.15-seed0-m0-*.npy
+        打包概率卷 → out/diffusion/round154-sampler/d15-paired/rolls-s0d0.15-seed0-m0.npz
+        统计元数据 → out/diffusion/round154-sampler/d15-paired/sample-meta-s0d0.15-seed0-m0.json
+
+下一步：python3 tools/roll-to-osu32.py out/diffusion/round154-sampler/d15-paired/roll-s0d0.15-seed0-m0-*.npy --concat --bpm 136.3 -o out/diffusion32/s0d0.15-seed0-m0.osu   # 1/32 转换器
+▶ 读入 6 个窗口（6 个文件），4K，step=55.026ms（bpm 136.3）
+
+=== 写出 ===
+  out/diffusion/round154-sampler/d15-paired.osu  音符 535（tap 535 / LN 0）  时长 84.19s  NPS 6.35  LN占比 0.0
+
+下一步：node tools/gj/batch-koishi.mjs out/diffusion/round154-sampler/d15-paired.osu
+paired None < Alpha Low speed

@@ -1,0 +1,96 @@
+{
+ "root": "out/diffusion/round145-perstyle",
+ "num": 5,
+ "diff": 0.5,
+ "seed": 0,
+ "common_occ": 0.1986,
+ "protocol": "每模型只采它自己的风格；5 窗；diff=0.5；按该风格数据集占位率反解阈值（密度对齐）；p132 = 相邻占用行间隔==1 的比例，跨窗口池化（round141-burst-stats.pooled_stats）",
+ "dataset_p132": {
+  "tech": 0.5103,
+  "jack": 0.0608,
+  "speed": 0.6139,
+  "stamina": 0.116
+ },
+ "dataset_occ": {
+  "tech": 0.1924,
+  "jack": 0.2259,
+  "speed": 0.1939,
+  "stamina": 0.178
+ },
+ "models": {
+  "tech": {
+   "ckpt": "out/diffusion/round145-perstyle/tech.pt",
+   "pred": "x0",
+   "params": 439012,
+   "base": 48,
+   "timesteps": 200,
+   "val": 0.08473323285579681,
+   "epoch": 9,
+   "train_seconds": 740.1,
+   "train_windows": 14818,
+   "train_groups": 26,
+   "val_windows": 1062,
+   "difficulty_condition": {
+    "type": "occupancy-percentile-v1",
+    "lo": 0.0654296875,
+    "hi": 0.30859375,
+    "percentiles": [
+     5,
+     95
+    ],
+    "range": [
+     0.0,
+     1.0
+    ],
+    "fit_on": "train split only (split==0)"
+   },
+   "style_condition": "none (per-style model; 模型身份 = 风格)",
+   "own": {
+    "窗口数": 5,
+    "占位率": 0.1924,
+    "p132": 0.312,
+    "间隔数": 641,
+    "非空行比例": 0.5047,
+    "每窗音符数": 197.0,
+    "邻接覆盖_lane": 0.0355,
+    "邻接覆盖_row": 0.3543,
+    "原始占位率@0.5": 0.117,
+    "原始p132@0.5": 0.1367,
+    "目标占位率": 0.1924,
+    "阈值": 0.264398,
+    "数据集p132": 0.5103,
+    "p132减数据集": -0.1983,
+    "达标_0.05": false
+   },
+   "common": {
+    "窗口数": 5,
+    "占位率": 0.1986,
+    "p132": 0.3247,
+    "间隔数": 653,
+    "非空行比例": 0.5141,
+    "每窗音符数": 203.4,
+    "邻接覆盖_lane": 0.0413,
+    "邻接覆盖_row": 0.3668,
+    "原始占位率@0.5": 0.117,
+    "原始p132@0.5": 0.1367,
+    "目标占位率": 0.1986,
+    "阈值": 0.255425,
+    "数据集p132": 0.5103,
+    "p132减数据集": -0.1856,
+    "达标_0.05": false
+   }
+  }
+ },
+ "table": {
+  "tech": {
+   "dataset": 0.5103,
+   "single": 0.3962,
+   "perstyle": 0.312,
+   "delta": -0.1983,
+   "ok": false
+  }
+ },
+ "ok_count": 0,
+ "n_models": 1,
+ "max_abs_delta": 0.1983
+}

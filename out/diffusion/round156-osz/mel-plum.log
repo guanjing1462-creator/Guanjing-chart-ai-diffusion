@@ -1,0 +1,6 @@
+/usr/local/lib/python3.12/dist-packages/joblib/_multiprocessing_helpers.py:44: UserWarning: [Errno 2] No such file or directory.  joblib will operate in serial mode
+  warnings.warn("%s.  joblib will operate in serial mode" % (e,))
+音频 ref/multisong/Plum-FallenEra.mp3：171.3s，bpm 180.0 → 1/32 格 41.67ms，4112 格（有效 4112）
+条件 (4112, 32) float16：均值 0.1245，>0 占 81.3%，通道 P99 中位 0.3522
+自证：条件总强度 vs onset 包络 r=+0.044（同格聚合后同向），lag1 r=+0.235
+写出 out/diffusion/round156-osz/mel-plum.npz（0.23MB），用时 29.5s

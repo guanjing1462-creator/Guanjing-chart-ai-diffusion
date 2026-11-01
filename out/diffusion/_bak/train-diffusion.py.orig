@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""4K 谱面扩散模型（CPU 可训练的小型一维 U-Net DDPM）。
+
+数据：out/diff-data/dataset.npz（[N, 4, 128] 钢琴卷窗口）
+条件：风格（4 类）+ 难度档（4 类）
+训练目标：预测加在 x0 上的噪声（eps 参数化）
+"""
+import argparse, json, math, os, time
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+def temb_fn(dim):
+    half = dim // 2
+    freqs = torch.exp(-math.log(10000) * torch.arange(half, dtype=torch.float32) / half)
+
+    def f(t):
+        a = t.float()[:, None] * freqs[None]
+        return torch.cat([torch.sin(a), torch.cos(a)], dim=1)
+    return f
+
+
+class Block(nn.Module):
+    def __init__(self, cin, cout, temb_dim, up=False):
+        super().__init__()
+        self.up = up
+        self.conv1 = nn.Conv1d(cin, cout, 3, padding=1)
+        self.conv2 = nn.Conv1d(cout, cout, 3, padding=1)
+        self.norm1 = nn.GroupNorm(8, cin)
+        self.norm2 = nn.GroupNorm(8, cout)
+        self.temb = nn.Linear(temb_dim, cout)
+        self.skip = nn.Conv1d(cin, cout, 1) if cin != cout else nn.Identity()
+
+    def forward(self, x, te):
+        h = self.conv1(F.silu(self.norm1(x)))
+        h = h + self.temb(F.silu(te))[:, :, None]
+        h = self.conv2(F.silu(self.norm2(h)))
+        return h + self.skip(x)
+
+
+class UNet1D(nn.Module):
+    def __init__(self, cin=4, base=48, temb_dim=128, n_style=4, n_diff=4):
+        super().__init__()
+        self.temb_fn = temb_fn(temb_dim)
+        self.c_style = nn.Embedding(n_style, temb_dim)
+        self.c_diff = nn.Embedding(n_diff, temb_dim)
+        self.temb = nn.Sequential(nn.Linear(temb_dim, temb_dim), nn.SiLU(),
+                                  nn.Linear(temb_dim, temb_dim))
+        self.inp = nn.Conv1d(cin, base, 3, padding=1)
+        self.d1 = Block(base, base, temb_dim)          # 128
+        self.d2 = Block(base, base * 2, temb_dim)      # 64
+        self.d3 = Block(base * 2, base * 2, temb_dim)  # 32
+        self.mid = Block(base * 2, base * 2, temb_dim)
+        self.u3 = Block(base * 4, base * 2, temb_dim)  # cat(m↑, e1)
+        self.u2 = Block(base * 3, base, temb_dim)      # cat(u3↑, e0)
+        self.out = nn.Conv1d(base, cin, 3, padding=1)
+        self.down = nn.MaxPool1d(2)
+        self.up = nn.Upsample(scale_factor=2, mode='nearest')
+
+    def forward(self, x, t, style, diff):
+        te = self.temb(self.temb_fn(t) + self.c_style(style) + self.c_diff(diff))
+        h = self.inp(x)                                # [B,b,128]
+        e0 = self.d1(h, te)                            # [B,b,128]
+        e1 = self.d2(self.down(e0), te)                # [B,2b,64]
+        e2 = self.d3(self.down(e1), te)                # [B,2b,32]
+        m = self.mid(e2, te)                           # [B,2b,32]
+        u3 = self.u3(torch.cat([self.up(m), e1], dim=1), te)   # [B,2b,64]
+        u2 = self.u2(torch.cat([self.up(u3), e0], dim=1), te)  # [B,b,128]
+        return self.out(u2)
+
+
+class Diffusion:
+    def __init__(self, steps=200, device='cpu'):
+        self.T = steps
+        self.betas = torch.linspace(1e-4, 0.02, steps)
+        self.alphas = 1 - self.betas
+        self.abar = torch.cumprod(self.alphas, 0)
+
+    def q(self, x0, t, noise):
+        a = self.abar[t].to(x0.device)[:, None, None]
+        return a.sqrt() * x0 + (1 - a).sqrt() * noise
+
+    def target(self, x0, t, noise, mode):
+        """返回 (xt, 训练目标, 权重)。eps=噪声，x0=干净谱面，v=速度。"""
+        a = self.abar[t].to(x0.device)[:, None, None]
+        xt = a.sqrt() * x0 + (1 - a).sqrt() * noise
+        if mode == 'x0':
+            return xt, x0, None
+        if mode == 'v':
+            return xt, a.sqrt() * noise - (1 - a).sqrt() * x0, None
+        return xt, noise, None
+
+    def loss(self, model, x0, style, diff, mode='eps'):
+        t = torch.randint(0, self.T, (x0.shape[0],), device=x0.device)
+        noise = torch.randn_like(x0)
+        xt, tgt, _ = self.target(x0, t, noise, mode)
+        pred = model(xt, t, style, diff)
+        return F.mse_loss(pred, tgt)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--data', default='out/diff-data/dataset.npz')
+    ap.add_argument('--epochs', type=int, default=10)
+    ap.add_argument('--batch', type=int, default=64)
+    ap.add_argument('--lr', type=float, default=2e-4)
+    ap.add_argument('--base', type=int, default=48)
+    ap.add_argument('--timesteps', type=int, default=200)
+    ap.add_argument('--pred', choices=['eps', 'x0', 'v'], default='eps',
+                    help='训练目标参数化：eps（噪声）/ x0（干净谱面，适合稀疏二值）/ v（速度）')
+    ap.add_argument('--max-windows', type=int, default=0, help='只用前 N 个窗口（调试用）')
+    ap.add_argument('--out', default='out/models/diffusion4k.pt')
+    ap.add_argument('--threads', type=int, default=1,
+                    help='torch 线程数。CPU 被别的进程抢占时 1 线程反而最快（实测 617ms vs 2197ms/step）')
+    ap.add_argument('--val-frac', type=float, default=0.03, help='验证集比例')
+    ap.add_argument('--seed', type=int, default=0, help='切分随机种子')
+    ap.add_argument('--val-fixed', type=int, default=1,
+                    help='验证用固定的 t/噪声（同一把尺子量，曲线才可比）')
+    ap.add_argument('--min-epochs', type=int, default=0, help='时间预算生效前至少跑几轮')
+    ap.add_argument('--time-budget', type=int, default=0, help='秒；超了就停（0=不限）')
+    ap.add_argument('--log', default='', help='逐 epoch 追加 jsonl（便于出报告）')
+    a = ap.parse_args()
+
+    torch.set_num_threads(max(1, a.threads))
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass
+    print(f'线程 {torch.get_num_threads()}（internop {torch.get_num_interop_threads()}）', flush=True)
+
+    d = np.load(a.data)
+    X = torch.from_numpy(d['X'].astype(np.float32))     # [N,4,128]
+    S = torch.from_numpy(d['style'].astype(np.int64))
+    D = torch.from_numpy(d['diff'].astype(np.int64))
+    n_all = len(X)
+    # 随机抽子集（带种子）：直接取前 N 个会按歌曲顺序偏置，风格/难度分布会歪
+    gsub = torch.Generator().manual_seed(a.seed)
+    order = torch.randperm(n_all, generator=gsub)
+    if a.max_windows and a.max_windows < n_all:
+        order = order[:a.max_windows]
+    n = len(order)
+    k = int(n * (1 - a.val_frac))
+    tr, te = order[:k], order[k:]
+    print(f'数据 全集 {n_all}，本配置用 {n} 窗口，训练 {len(tr)} / 验证 {len(te)}', flush=True)
+    print(f'  子集风格分布 {torch.bincount(S[tr], minlength=4).tolist()}'
+          f'  难度分布 {torch.bincount(D[tr], minlength=4).tolist()}', flush=True)
+
+    model = UNet1D(base=a.base)
+    nparam = sum(p.numel() for p in model.parameters())
+    print('参数量 %.3fM' % (nparam / 1e6), flush=True)
+    diff = Diffusion(a.timesteps)
+    opt = torch.optim.AdamW(model.parameters(), lr=a.lr, weight_decay=0.01)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=a.epochs)
+
+    # 验证固定 t 与噪声：否则每轮用不同的噪声量同一把尺子，曲线抖到看不清趋势
+    gval = torch.Generator().manual_seed(1234)
+    vt = torch.randint(0, a.timesteps, (len(te),), generator=gval)
+    vn = torch.randn(len(te), 4, 128, generator=gval)
+    Xte, Ste, Dte = X[te], S[te], D[te]
+
+    def eval_loss():
+        tot = 0.0
+        with torch.no_grad():
+            for i in range(0, len(te), 512):
+                m = min(512, len(te) - i)          # 末块真实长度（不能用 sl.stop-sl.start）
+                sl = slice(i, i + m)
+                if a.val_fixed:
+                    xt = diff.q(Xte[sl], vt[sl], vn[sl])
+                    pred = model(xt, vt[sl], Ste[sl], Dte[sl])
+                    _, tgt_v, _ = diff.target(Xte[sl], vt[sl], vn[sl], a.pred)
+                    l = F.mse_loss(pred, tgt_v)
+                else:
+                    l = diff.loss(model, Xte[sl], Ste[sl], Dte[sl], a.pred)
+                tot += l.item() * m
+        return tot / len(te)
+
+    best = 1e9
+    t_start = time.time()
+    for ep in range(1, a.epochs + 1):
+        model.train()
+        t0 = time.time()
+        p = tr[torch.randperm(len(tr))]
+        tot = 0.0
+        nb = 0
+        t_first = 0.0
+        for i in range(0, len(p), a.batch):
+            idx = p[i:i + a.batch]
+            tb = time.time()
+            opt.zero_grad()
+            loss = diff.loss(model, X[idx], S[idx], D[idx])
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            opt.step()
+            tot += loss.item() * len(idx)
+            nb += 1
+            if nb == 1:
+                t_first = (time.time() - tb) * 1000
+        sched.step()
+        model.eval()
+        vl = eval_loss()
+        ep_s = time.time() - t0
+        print(f'epoch {ep}: 训练 {tot/len(p):.4f}  验证 {vl:.4f}  '
+              f'用时 {ep_s:.0f}s（{nb} batch，{t_first:.0f}ms/batch）', flush=True)
+        if a.log:
+            os.makedirs(os.path.dirname(a.log) or '.', exist_ok=True)
+            with open(a.log, 'a') as f:
+                f.write(json.dumps({'epoch': ep, 'train': tot / len(p), 'val': vl,
+                                    'sec': round(ep_s, 1), 'batches': nb,
+                                    'ms_per_batch': round(t_first),
+                                    'lr': round(sched.get_last_lr()[0], 8)},
+                                   ensure_ascii=False) + '\n')
+        if vl < best:
+            best = vl
+            os.makedirs(os.path.dirname(a.out) or '.', exist_ok=True)
+            torch.save({'state': model.state_dict(), 'pred': a.pred, 'base': a.base,
+                        'temb_dim': 128, 'timesteps': a.timesteps, 'val': vl,
+                        'epoch': ep, 'batch': a.batch, 'rows': X.shape[2],
+                        'windows': n, 'params': nparam,
+                        'train_seconds': round(time.time() - t_start, 1)},
+                       a.out)
+            print(f'  ↳ 保存最优（验证 {vl:.4f}）', flush=True)
+        if a.time_budget and ep >= a.min_epochs and (time.time() - t_start) > a.time_budget:
+            print(f'时间预算 {a.time_budget}s 到，停在 epoch {ep}', flush=True)
+            break
+    print(f'完成，最优验证损失 {best:.4f}，总用时 {time.time()-t_start:.0f}s')
+
+
+if __name__ == '__main__':
+    main()

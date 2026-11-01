@@ -1,0 +1,30 @@
+线程 1（internop 1）
+数据 out/diff-data-ln/dataset.npz：83027 窗口 × 8 通道 × 256 行；LN 模式 full，λ=1.0
+  目标占位率(前4通道) 0.2223；LN 体占用率(后4通道) 0.0275
+连续难度条件（占位率，train 拟合）：0.083–0.389 → [0,1]；train 均值 0.447 / val 均值 0.431
+组规模（train）：128 组，最大 29722 窗 / 中位 201 窗 / 最小 5 窗
+split 口径：train = split==0 → 75659 窗 / 2105 谱 / 128 组；val = split==1 → 4149 窗 / 143 谱 / 16 组；test = split==2 → 3219 窗（本次不碰）
+每个 epoch 从 train 无放回抽 6000 窗（共 75659）；val 用完整 4149 窗
+  风格分布 train [12751, 26795, 10406, 25707]  val [1035, 869, 1034, 1211]
+参数量 0.441M（8 通道：占用 4 + LN 体 4）
+  本 epoch 抽到 6000 窗，覆盖 127 组，单组最多 88 窗（上限 300）
+epoch 1: 训练 总 0.1378（占用 0.1172 / LN 0.0206）  验证 占用 0.0998 / LN 0.0172（组均 0.0993 / 0.0154）  用时 182s（188 batch，1160ms/batch）
+  ↳ 保存最优（占用+LN 0.1170）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 2: 训练 总 0.1072（占用 0.0948 / LN 0.0124）  验证 占用 0.0911 / LN 0.0141（组均 0.0907 / 0.0123）  用时 191s（188 batch，853ms/batch）
+  ↳ 保存最优（占用+LN 0.1053）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 3: 训练 总 0.1004（占用 0.0889 / LN 0.0115）  验证 占用 0.0856 / LN 0.0142（组均 0.0854 / 0.0125）  用时 202s（188 batch，865ms/batch）
+  ↳ 保存最优（占用+LN 0.0998）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 4: 训练 总 0.0947（占用 0.0841 / LN 0.0106）  验证 占用 0.0827 / LN 0.0121（组均 0.0826 / 0.0105）  用时 193s（188 batch，861ms/batch）
+  ↳ 保存最优（占用+LN 0.0947）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 5: 训练 总 0.0938（占用 0.0835 / LN 0.0103）  验证 占用 0.0810 / LN 0.0118（组均 0.0809 / 0.0102）  用时 209s（188 batch，765ms/batch）
+  ↳ 保存最优（占用+LN 0.0928）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 6: 训练 总 0.0899（占用 0.0805 / LN 0.0094）  验证 占用 0.0801 / LN 0.0114（组均 0.0801 / 0.0099）  用时 198s（188 batch，1369ms/batch）
+  ↳ 保存最优（占用+LN 0.0915）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 7: 训练 总 0.0893（占用 0.0802 / LN 0.0090）  验证 占用 0.0794 / LN 0.0114（组均 0.0793 / 0.0099）  用时 162s（188 batch，789ms/batch）
+  ↳ 保存最优（占用+LN 0.0908）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 8: 训练 总 0.0882（占用 0.0794 / LN 0.0087）  验证 占用 0.0792 / LN 0.0111（组均 0.0792 / 0.0096）  用时 142s（188 batch，719ms/batch）
+  ↳ 保存最优（占用+LN 0.0903）→ out/diffusion/round147-ln/l1.0/model.pt
+epoch 9: 训练 总 0.0885（占用 0.0795 / LN 0.0090）  验证 占用 0.0791 / LN 0.0111（组均 0.0790 / 0.0096）  用时 136s（188 batch，614ms/batch）
+  ↳ 保存最优（占用+LN 0.0902）→ out/diffusion/round147-ln/l1.0/model.pt
+末轮权重 → out/diffusion/round147-ln/l1.0/model-last.pt
+完成，最优 占用+LN 0.0902（epoch 9），总用时 1619s

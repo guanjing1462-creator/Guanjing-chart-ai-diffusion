@@ -1,0 +1,58 @@
+[
+ {
+  "file": "test-random.osu",
+  "diff": 12.01,
+  "tier": "Beta mid",
+  "pattern": "jack",
+  "probs": {
+   "jack": 0.998,
+   "ln": 0,
+   "speed": 0.001,
+   "stamina": 0.001,
+   "tech": 0
+  },
+  "error": null
+ },
+ {
+  "file": "test-real-s2d3.osu",
+  "diff": null,
+  "tier": "< Alpha Low",
+  "pattern": "jack",
+  "probs": {
+   "jack": 0.996,
+   "ln": 0,
+   "speed": 0.002,
+   "stamina": 0.001,
+   "tech": 0.001
+  },
+  "error": null
+ },
+ {
+  "file": "test-real-s2d3-bpm200.osu",
+  "diff": 14.03,
+  "tier": "Delta mid",
+  "pattern": "jack",
+  "probs": {
+   "jack": 0.988,
+   "ln": 0,
+   "speed": 0.002,
+   "stamina": 0.004,
+   "tech": 0.006
+  },
+  "error": null
+ },
+ {
+  "file": "test-random-ln.osu",
+  "diff": null,
+  "tier": "< Alpha Low",
+  "pattern": "jack",
+  "probs": {
+   "jack": 0.995,
+   "ln": 0,
+   "speed": 0.003,
+   "stamina": 0.001,
+   "tech": 0.001
+  },
+  "error": null
+ }
+]

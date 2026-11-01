@@ -1,0 +1,728 @@
+{
+ "meta": {
+  "script": "tools/eval-generated.py",
+  "label": "rule-gen",
+  "n_charts": 4,
+  "pack_sample": null,
+  "seed": 0,
+  "elapsed_s": 1.5,
+  "centroids": {
+   "tech": {
+    "n": 19,
+    "probs": {
+     "tech": 0.2343,
+     "jack": 0.0471,
+     "speed": 0.4183,
+     "stamina": 0.2995,
+     "ln": 0.0008
+    },
+    "source": "/tmp/d_tech.json"
+   },
+   "jack": {
+    "n": 20,
+    "probs": {
+     "tech": 0.03,
+     "jack": 0.9355,
+     "speed": 0.0208,
+     "stamina": 0.0135,
+     "ln": 0.0001
+    },
+    "source": "/tmp/d_jack.json"
+   },
+   "speed": {
+    "n": 20,
+    "probs": {
+     "tech": 0.1792,
+     "jack": 0.0015,
+     "speed": 0.375,
+     "stamina": 0.4437,
+     "ln": 0.0004
+    },
+    "source": "/tmp/d_speed.json"
+   },
+   "stamina": {
+    "n": 19,
+    "probs": {
+     "tech": 0.0228,
+     "jack": 0.6569,
+     "speed": 0.1725,
+     "stamina": 0.1468,
+     "ln": 0.0006
+    },
+    "source": "/tmp/d_stamina.json"
+   }
+  },
+  "notes": [
+   "Koishi pattern 标签不可靠（人类谱自身一致率仅 42~45%），只看 probs/余弦与 diff",
+   "diff 为 null 表示 Koishi 判为低于 11 级（难度模型下限）",
+   "1/32 占比 = 行间隔落在 1/32 拍（±50%）的比例，按谱面 bpm 归一到 1/16 格计数",
+   "手位移 = 相邻行重心列索引差的绝对值均值（单位：列宽）",
+   "行重复率 = 8 行滑窗签名中「重复出现」的比例",
+   "可弹性冲突口径：同列 <55ms；单侧（0/1 或 2/3）55ms 内 ≥3 音；另给「单列最高频率 Hz」——1/16 网格(110ms)下 55ms 冲突不可能触发，只有 1/32 才有，所以 0 冲突不代表好弹，还要看单指要按多快"
+  ]
+ },
+ "charts": [
+  {
+   "file": "out/all/Heart_Fraction--Hybrid--D22.osu",
+   "name": "Heart_Fraction--Hybrid--D22.osu",
+   "title": "INTERNET YAMERO",
+   "version": "GJ Hybrid D22",
+   "notes": 3543,
+   "rows": 2461,
+   "bpm": 136.3,
+   "song": "Heart_Fraction",
+   "duration_s": 188.2,
+   "note_rate": 18.83,
+   "row_rate": 13.08,
+   "npr": 1.44,
+   "chord_rate": 0.327,
+   "ln_ratio": 0.017,
+   "jack_rate": 0.186,
+   "p132": 0.248,
+   "gap_hist": {
+    "1/32": 0.248,
+    "3/16": 0.011,
+    "<1/32": 0.576,
+    "1/16": 0.103,
+    ">=1/2": 0.015,
+    "1/4": 0.009,
+    "1/8": 0.039
+   },
+   "hand_shift": 1.255,
+   "repeat8": 0.218,
+   "occupancy": 0.5177,
+   "fast_same_col": 239,
+   "side_overload": 59,
+   "conflicts": 298,
+   "conflicts_per_min": 95.01,
+   "max_col_hz": 27.78,
+   "align": {
+    "song": "Heart_Fraction",
+    "n_onsets": 1559,
+    "mean_ms": 35.8,
+    "median_ms": 33.5,
+    "p90_ms": 67.4,
+    "within10": 0.153,
+    "within20": 0.3,
+    "within40": 0.597,
+    "row_median_ms": 33.4,
+    "row_within15": 0.223,
+    "grid_fit": 0.441,
+    "onset_cell": {
+     "onset_rank_mean": 0.538,
+     "onset_strong_rate": 0.326,
+     "accent_rank_mean": 0.64,
+     "accent_strong_rate": 0.452
+    },
+    "chance": {
+     "mean_ms": 35.8,
+     "chance_grid_ms": 37.4,
+     "chance_uniform_ms": 35.8,
+     "best_shift_ms": -48,
+     "mean_at_best_shift_ms": 33.4,
+     "gain_vs_grid": 1.6
+    }
+   },
+   "diff": 16.77,
+   "tier": "Thaumiel Eta mid/low",
+   "pattern": "tech",
+   "probs": {
+    "jack": 0.007,
+    "ln": 0,
+    "speed": 0.038,
+    "stamina": 0.026,
+    "tech": 0.929
+   },
+   "cos": {
+    "tech": 0.458,
+    "jack": 0.041,
+    "speed": 0.34,
+    "stamina": 0.056
+   },
+   "best_pack": "tech",
+   "best_cos": 0.458,
+   "group": "rule-gen"
+  },
+  {
+   "file": "out/all/Heart_Fraction--Jack--D22.osu",
+   "name": "Heart_Fraction--Jack--D22.osu",
+   "title": "INTERNET YAMERO",
+   "version": "GJ Jack D22",
+   "notes": 2828,
+   "rows": 1148,
+   "bpm": 136.3,
+   "song": "Heart_Fraction",
+   "duration_s": 188.2,
+   "note_rate": 15.03,
+   "row_rate": 6.1,
+   "npr": 2.463,
+   "chord_rate": 0.813,
+   "ln_ratio": 0.025,
+   "jack_rate": 0.649,
+   "p132": 0.107,
+   "gap_hist": {
+    "1/16": 0.48,
+    "3/16": 0.045,
+    "1/4": 0.03,
+    ">=1/2": 0.031,
+    "1/8": 0.232,
+    "<1/32": 0.075,
+    "1/32": 0.107
+   },
+   "hand_shift": 0.877,
+   "repeat8": 0.243,
+   "occupancy": 0.4132,
+   "fast_same_col": 35,
+   "side_overload": 33,
+   "conflicts": 68,
+   "conflicts_per_min": 21.68,
+   "max_col_hz": 27.78,
+   "align": {
+    "song": "Heart_Fraction",
+    "n_onsets": 1559,
+    "mean_ms": 36.3,
+    "median_ms": 31.9,
+    "p90_ms": 81.8,
+    "within10": 0.184,
+    "within20": 0.337,
+    "within40": 0.61,
+    "row_median_ms": 33.3,
+    "row_within15": 0.252,
+    "grid_fit": 0.894,
+    "onset_cell": {
+     "onset_rank_mean": 0.538,
+     "onset_strong_rate": 0.321,
+     "accent_rank_mean": 0.618,
+     "accent_strong_rate": 0.421
+    },
+    "chance": {
+     "mean_ms": 36.3,
+     "chance_grid_ms": 37.4,
+     "chance_uniform_ms": 36.2,
+     "best_shift_ms": -72,
+     "mean_at_best_shift_ms": 33.0,
+     "gain_vs_grid": 1.2
+    }
+   },
+   "diff": 12.58,
+   "tier": "Gamma low",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.991,
+    "ln": 0,
+    "speed": 0.006,
+    "stamina": 0.002,
+    "tech": 0.002
+   },
+   "cos": {
+    "tech": 0.089,
+    "jack": 0.999,
+    "speed": 0.008,
+    "stamina": 0.947
+   },
+   "best_pack": "jack",
+   "best_cos": 0.999,
+   "group": "rule-gen"
+  },
+  {
+   "file": "out/all/Heart_Fraction--LN--D22.osu",
+   "name": "Heart_Fraction--LN--D22.osu",
+   "title": "INTERNET YAMERO",
+   "version": "GJ LN D22",
+   "notes": 2879,
+   "rows": 2083,
+   "bpm": 136.3,
+   "song": "Heart_Fraction",
+   "duration_s": 188.2,
+   "note_rate": 15.3,
+   "row_rate": 11.07,
+   "npr": 1.382,
+   "chord_rate": 0.316,
+   "ln_ratio": 0.124,
+   "jack_rate": 0.19,
+   "p132": 0.246,
+   "gap_hist": {
+    "1/32": 0.246,
+    "1/16": 0.14,
+    "1/8": 0.083,
+    "3/16": 0.018,
+    "<1/32": 0.482,
+    ">=1/2": 0.014,
+    "1/4": 0.017
+   },
+   "hand_shift": 1.306,
+   "repeat8": 0.139,
+   "occupancy": 0.4207,
+   "fast_same_col": 168,
+   "side_overload": 47,
+   "conflicts": 215,
+   "conflicts_per_min": 68.55,
+   "max_col_hz": 27.78,
+   "align": {
+    "song": "Heart_Fraction",
+    "n_onsets": 1559,
+    "mean_ms": 35.2,
+    "median_ms": 32.8,
+    "p90_ms": 66.9,
+    "within10": 0.173,
+    "within20": 0.315,
+    "within40": 0.61,
+    "row_median_ms": 33.6,
+    "row_within15": 0.232,
+    "grid_fit": 0.48,
+    "onset_cell": {
+     "onset_rank_mean": 0.541,
+     "onset_strong_rate": 0.326,
+     "accent_rank_mean": 0.639,
+     "accent_strong_rate": 0.455
+    },
+    "chance": {
+     "mean_ms": 35.2,
+     "chance_grid_ms": 37.5,
+     "chance_uniform_ms": 36.2,
+     "best_shift_ms": -52,
+     "mean_at_best_shift_ms": 33.8,
+     "gain_vs_grid": 2.3
+    }
+   },
+   "diff": 15.86,
+   "tier": "Emik Zeta mid/low",
+   "pattern": "tech",
+   "probs": {
+    "jack": 0.005,
+    "ln": 0,
+    "speed": 0.11,
+    "stamina": 0.03,
+    "tech": 0.854
+   },
+   "cos": {
+    "tech": 0.522,
+    "jack": 0.041,
+    "speed": 0.396,
+    "stamina": 0.077
+   },
+   "best_pack": "tech",
+   "best_cos": 0.522,
+   "group": "rule-gen"
+  },
+  {
+   "file": "out/all/Heart_Fraction--Tech--D22.osu",
+   "name": "Heart_Fraction--Tech--D22.osu",
+   "title": "INTERNET YAMERO",
+   "version": "GJ Tech D22",
+   "notes": 3226,
+   "rows": 2243,
+   "bpm": 136.3,
+   "song": "Heart_Fraction",
+   "duration_s": 188.2,
+   "note_rate": 17.14,
+   "row_rate": 11.92,
+   "npr": 1.438,
+   "chord_rate": 0.354,
+   "ln_ratio": 0.014,
+   "jack_rate": 0.171,
+   "p132": 0.228,
+   "gap_hist": {
+    "1/32": 0.228,
+    "1/16": 0.144,
+    "1/8": 0.05,
+    "3/16": 0.008,
+    "<1/32": 0.538,
+    ">=1/2": 0.017,
+    "1/4": 0.016
+   },
+   "hand_shift": 1.356,
+   "repeat8": 0.267,
+   "occupancy": 0.4714,
+   "fast_same_col": 192,
+   "side_overload": 54,
+   "conflicts": 246,
+   "conflicts_per_min": 78.43,
+   "max_col_hz": 27.78,
+   "align": {
+    "song": "Heart_Fraction",
+    "n_onsets": 1559,
+    "mean_ms": 35.4,
+    "median_ms": 32.9,
+    "p90_ms": 67.4,
+    "within10": 0.168,
+    "within20": 0.316,
+    "within40": 0.606,
+    "row_median_ms": 33.3,
+    "row_within15": 0.226,
+    "grid_fit": 0.464,
+    "onset_cell": {
+     "onset_rank_mean": 0.549,
+     "onset_strong_rate": 0.332,
+     "accent_rank_mean": 0.65,
+     "accent_strong_rate": 0.471
+    },
+    "chance": {
+     "mean_ms": 35.4,
+     "chance_grid_ms": 37.4,
+     "chance_uniform_ms": 35.9,
+     "best_shift_ms": -64,
+     "mean_at_best_shift_ms": 33.2,
+     "gain_vs_grid": 2.0
+    }
+   },
+   "diff": 16.14,
+   "tier": "Emik Zeta mid/high",
+   "pattern": "tech",
+   "probs": {
+    "jack": 0.001,
+    "ln": 0,
+    "speed": 0.029,
+    "stamina": 0.053,
+    "tech": 0.916
+   },
+   "cos": {
+    "tech": 0.466,
+    "jack": 0.035,
+    "speed": 0.356,
+    "stamina": 0.054
+   },
+   "best_pack": "tech",
+   "best_cos": 0.466,
+   "group": "rule-gen"
+  }
+ ],
+ "groups": {
+  "rule-gen": {
+   "note_rate": {
+    "n": 4,
+    "mean": 16.575,
+    "std": 1.534,
+    "median": 16.22,
+    "p10": 15.03,
+    "p90": 18.83
+   },
+   "row_rate": {
+    "n": 4,
+    "mean": 10.543,
+    "std": 2.662,
+    "median": 11.495,
+    "p10": 6.1,
+    "p90": 13.08
+   },
+   "npr": {
+    "n": 4,
+    "mean": 1.6807,
+    "std": 0.4522,
+    "median": 1.439,
+    "p10": 1.382,
+    "p90": 2.463
+   },
+   "chord_rate": {
+    "n": 4,
+    "mean": 0.4525,
+    "std": 0.2086,
+    "median": 0.3405,
+    "p10": 0.316,
+    "p90": 0.813
+   },
+   "ln_ratio": {
+    "n": 4,
+    "mean": 0.045,
+    "std": 0.0458,
+    "median": 0.021,
+    "p10": 0.014,
+    "p90": 0.124
+   },
+   "jack_rate": {
+    "n": 4,
+    "mean": 0.299,
+    "std": 0.2022,
+    "median": 0.188,
+    "p10": 0.171,
+    "p90": 0.649
+   },
+   "p132": {
+    "n": 4,
+    "mean": 0.2072,
+    "std": 0.0584,
+    "median": 0.237,
+    "p10": 0.107,
+    "p90": 0.248
+   },
+   "hand_shift": {
+    "n": 4,
+    "mean": 1.1985,
+    "std": 0.189,
+    "median": 1.2805,
+    "p10": 0.877,
+    "p90": 1.356
+   },
+   "repeat8": {
+    "n": 4,
+    "mean": 0.2167,
+    "std": 0.0481,
+    "median": 0.2305,
+    "p10": 0.139,
+    "p90": 0.267
+   },
+   "occupancy": {
+    "n": 4,
+    "mean": 0.45575,
+    "std": 0.0422,
+    "median": 0.44605,
+    "p10": 0.4132,
+    "p90": 0.5177
+   },
+   "conflicts_per_min": {
+    "n": 4,
+    "mean": 65.918,
+    "std": 27.234,
+    "median": 73.49,
+    "p10": 21.68,
+    "p90": 95.01
+   },
+   "max_col_hz": {
+    "n": 4,
+    "mean": 27.78,
+    "std": 0.0,
+    "median": 27.78,
+    "p10": 27.78,
+    "p90": 27.78
+   },
+   "diff": {
+    "n": 4,
+    "mean": 15.338,
+    "std": 1.626,
+    "median": 16.0,
+    "p10": 12.58,
+    "p90": 16.77
+   },
+   "best_cos": {
+    "n": 4,
+    "mean": 0.6113,
+    "std": 0.2252,
+    "median": 0.494,
+    "p10": 0.458,
+    "p90": 0.999
+   },
+   "cos_tech": {
+    "n": 4,
+    "mean": 0.3838,
+    "std": 0.172,
+    "median": 0.462,
+    "p10": 0.089,
+    "p90": 0.522
+   },
+   "cos_jack": {
+    "n": 4,
+    "mean": 0.279,
+    "std": 0.4157,
+    "median": 0.041,
+    "p10": 0.035,
+    "p90": 0.999
+   },
+   "cos_speed": {
+    "n": 4,
+    "mean": 0.275,
+    "std": 0.1555,
+    "median": 0.348,
+    "p10": 0.008,
+    "p90": 0.396
+   },
+   "cos_stamina": {
+    "n": 4,
+    "mean": 0.2835,
+    "std": 0.3832,
+    "median": 0.0665,
+    "p10": 0.054,
+    "p90": 0.947
+   },
+   "align": {
+    "n": 4,
+    "mean_ms": 35.7,
+    "median_ms": 32.8,
+    "within20": 0.317,
+    "within40": 0.606,
+    "row_within15": 0.233,
+    "grid_fit": 0.57,
+    "onset_rank": 0.542,
+    "accent_rank": 0.637,
+    "accent_strong": 0.45
+   },
+   "pattern_vote": {
+    "tech": 3,
+    "jack": 1
+   },
+   "best_pack_vote": {
+    "tech": 3,
+    "jack": 1
+   },
+   "diff_missing": 0,
+   "n": 4
+  }
+ },
+ "total": {
+  "note_rate": {
+   "n": 4,
+   "mean": 16.575,
+   "std": 1.534,
+   "median": 16.22,
+   "p10": 15.03,
+   "p90": 18.83
+  },
+  "row_rate": {
+   "n": 4,
+   "mean": 10.543,
+   "std": 2.662,
+   "median": 11.495,
+   "p10": 6.1,
+   "p90": 13.08
+  },
+  "npr": {
+   "n": 4,
+   "mean": 1.6807,
+   "std": 0.4522,
+   "median": 1.439,
+   "p10": 1.382,
+   "p90": 2.463
+  },
+  "chord_rate": {
+   "n": 4,
+   "mean": 0.4525,
+   "std": 0.2086,
+   "median": 0.3405,
+   "p10": 0.316,
+   "p90": 0.813
+  },
+  "ln_ratio": {
+   "n": 4,
+   "mean": 0.045,
+   "std": 0.0458,
+   "median": 0.021,
+   "p10": 0.014,
+   "p90": 0.124
+  },
+  "jack_rate": {
+   "n": 4,
+   "mean": 0.299,
+   "std": 0.2022,
+   "median": 0.188,
+   "p10": 0.171,
+   "p90": 0.649
+  },
+  "p132": {
+   "n": 4,
+   "mean": 0.2072,
+   "std": 0.0584,
+   "median": 0.237,
+   "p10": 0.107,
+   "p90": 0.248
+  },
+  "hand_shift": {
+   "n": 4,
+   "mean": 1.1985,
+   "std": 0.189,
+   "median": 1.2805,
+   "p10": 0.877,
+   "p90": 1.356
+  },
+  "repeat8": {
+   "n": 4,
+   "mean": 0.2167,
+   "std": 0.0481,
+   "median": 0.2305,
+   "p10": 0.139,
+   "p90": 0.267
+  },
+  "occupancy": {
+   "n": 4,
+   "mean": 0.45575,
+   "std": 0.0422,
+   "median": 0.44605,
+   "p10": 0.4132,
+   "p90": 0.5177
+  },
+  "conflicts_per_min": {
+   "n": 4,
+   "mean": 65.918,
+   "std": 27.234,
+   "median": 73.49,
+   "p10": 21.68,
+   "p90": 95.01
+  },
+  "max_col_hz": {
+   "n": 4,
+   "mean": 27.78,
+   "std": 0.0,
+   "median": 27.78,
+   "p10": 27.78,
+   "p90": 27.78
+  },
+  "diff": {
+   "n": 4,
+   "mean": 15.338,
+   "std": 1.626,
+   "median": 16.0,
+   "p10": 12.58,
+   "p90": 16.77
+  },
+  "best_cos": {
+   "n": 4,
+   "mean": 0.6113,
+   "std": 0.2252,
+   "median": 0.494,
+   "p10": 0.458,
+   "p90": 0.999
+  },
+  "cos_tech": {
+   "n": 4,
+   "mean": 0.3838,
+   "std": 0.172,
+   "median": 0.462,
+   "p10": 0.089,
+   "p90": 0.522
+  },
+  "cos_jack": {
+   "n": 4,
+   "mean": 0.279,
+   "std": 0.4157,
+   "median": 0.041,
+   "p10": 0.035,
+   "p90": 0.999
+  },
+  "cos_speed": {
+   "n": 4,
+   "mean": 0.275,
+   "std": 0.1555,
+   "median": 0.348,
+   "p10": 0.008,
+   "p90": 0.396
+  },
+  "cos_stamina": {
+   "n": 4,
+   "mean": 0.2835,
+   "std": 0.3832,
+   "median": 0.0665,
+   "p10": 0.054,
+   "p90": 0.947
+  },
+  "align": {
+   "n": 4,
+   "mean_ms": 35.7,
+   "median_ms": 32.8,
+   "within20": 0.317,
+   "within40": 0.606,
+   "row_within15": 0.233,
+   "grid_fit": 0.57,
+   "onset_rank": 0.542,
+   "accent_rank": 0.637,
+   "accent_strong": 0.45
+  },
+  "pattern_vote": {
+   "tech": 3,
+   "jack": 1
+  },
+  "best_pack_vote": {
+   "tech": 3,
+   "jack": 1
+  },
+  "diff_missing": 0,
+  "n": 4
+ }
+}

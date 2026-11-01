@@ -1,0 +1,22 @@
+{
+ "seen_windows": 35599,
+ "train_windows": 87009,
+ "seen_frac_of_train": 0.4091,
+ "B_total": 5025,
+ "B_seen": {
+  "pooled": 0.06811
+ },
+ "B_unseen": {
+  "pooled": 0.066925
+ },
+ "A": {
+  "pooled": 0.065973
+ },
+ "B": {
+  "pooled": 0.066982
+ },
+ "train_pool_last": {
+  "pooled": 0.066025
+ },
+ "seen_minus_unseen": 0.001185
+}

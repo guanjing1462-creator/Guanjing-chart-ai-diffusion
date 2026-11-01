@@ -1,0 +1,78 @@
+[1/4] tech: 采样（target-occ 0.1924）→ out/diffusion/round144-film/samples/film/tech-noise0
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 0 --diff 0.5 --num 5 --seed 0 --sample-seed 0 --threads 1 --target-occ 0.1924 --quiet --outdir out/diffusion/round144-film/samples/film/tech-noise0
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1924
+    各列占位率: [0.1961, 0.1828, 0.2227, 0.168]
+    1/32占比_p132: 0.4392
+    目标占位率: 0.1924
+[2/4] jack: 采样（target-occ 0.2259）→ out/diffusion/round144-film/samples/film/jack-noise0
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 1 --diff 0.5 --num 5 --seed 0 --sample-seed 0 --threads 1 --target-occ 0.2259 --quiet --outdir out/diffusion/round144-film/samples/film/jack-noise0
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.226
+    各列占位率: [0.1992, 0.2461, 0.2555, 0.2031]
+    1/32占比_p132: 0.2523
+    目标占位率: 0.2259
+[3/4] speed: 采样（target-occ 0.1939）→ out/diffusion/round144-film/samples/film/speed-noise0
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 2 --diff 0.5 --num 5 --seed 0 --sample-seed 0 --threads 1 --target-occ 0.1939 --quiet --outdir out/diffusion/round144-film/samples/film/speed-noise0
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1939
+    各列占位率: [0.1953, 0.1805, 0.225, 0.175]
+    1/32占比_p132: 0.4655
+    目标占位率: 0.1939
+[4/4] stamina: 采样（target-occ 0.178）→ out/diffusion/round144-film/samples/film/stamina-noise0
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 3 --diff 0.5 --num 5 --seed 0 --sample-seed 0 --threads 1 --target-occ 0.1780 --quiet --outdir out/diffusion/round144-film/samples/film/stamina-noise0
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1781
+    各列占位率: [0.1711, 0.1711, 0.2023, 0.168]
+    1/32占比_p132: 0.1146
+    目标占位率: 0.178
+[参照] tech: 另一份噪声（sample-seed 1）→ out/diffusion/round144-film/samples/film/tech-noise1
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 0 --diff 0.5 --num 5 --seed 0 --sample-seed 1 --threads 1 --target-occ 0.1924 --quiet --outdir out/diffusion/round144-film/samples/film/tech-noise1
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1924
+    各列占位率: [0.1898, 0.1914, 0.2195, 0.1688]
+    1/32占比_p132: 0.2883
+    目标占位率: 0.1924
+[参照] jack: 另一份噪声（sample-seed 1）→ out/diffusion/round144-film/samples/film/jack-noise1
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 1 --diff 0.5 --num 5 --seed 0 --sample-seed 1 --threads 1 --target-occ 0.2259 --quiet --outdir out/diffusion/round144-film/samples/film/jack-noise1
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.226
+    各列占位率: [0.2, 0.2484, 0.2484, 0.207]
+    1/32占比_p132: 0.2035
+    目标占位率: 0.2259
+[参照] speed: 另一份噪声（sample-seed 1）→ out/diffusion/round144-film/samples/film/speed-noise1
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 2 --diff 0.5 --num 5 --seed 0 --sample-seed 1 --threads 1 --target-occ 0.1939 --quiet --outdir out/diffusion/round144-film/samples/film/speed-noise1
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1939
+    各列占位率: [0.1875, 0.1898, 0.2266, 0.1719]
+    1/32占比_p132: 0.3137
+    目标占位率: 0.1939
+[参照] stamina: 另一份噪声（sample-seed 1）→ out/diffusion/round144-film/samples/film/stamina-noise1
+  $ /usr/bin/python3 /root/work/yamero-ai/proj/tools/sample-diffusion32film.py --ckpt out/diffusion/round144-film/diffusion32-film-last.pt --style 3 --diff 0.5 --num 5 --seed 0 --sample-seed 1 --threads 1 --target-occ 0.1780 --quiet --outdir out/diffusion/round144-film/samples/film/stamina-noise1
+    风格条件结构：film（FiLM: h=h*(1+γ)+β）
+    占位率: 0.1781
+    各列占位率: [0.1672, 0.1758, 0.2, 0.1695]
+    1/32占比_p132: 0.0627
+    目标占位率: 0.178
+
+=== film：四风格（5 窗/风格，密度对齐，同噪声）===
+   style     占位率    p132     数据集        Δ
+    tech  0.1924  0.4392  0.5103  -0.0711
+    jack  0.2260  0.2523  0.0608  +0.1915
+   speed  0.1939  0.4655  0.6139  -0.1484
+ stamina  0.1781  0.1146  0.1160  -0.0014
+  p132 降序: ['speed', 'tech', 'jack', 'stamina']  （数据集 ['speed', 'tech', 'stamina', 'jack']）  一致=False
+  tech/jack 倍数: 1.74（数据集 8.39）
+  成簇组均值 - 非成簇组均值: 0.2689（数据集 0.4737）
+
+  两两概率卷差异（MAE / 相对 / 二值翻转率）:
+           tech-jack  0.1454  0.658  0.1289
+          tech-speed  0.0558  0.251  0.0336
+        tech-stamina  0.1317  0.600  0.1018
+          jack-speed  0.1408  0.647  0.1316
+        jack-stamina  0.1388  0.647  0.1252
+       speed-stamina  0.1327  0.614  0.1014
+  换风格 MAE 均值 0.1242（相对 0.570）；换风格二值翻转率均值 0.1038
+  换噪声 MAE 均值 0.3197 → style/noise = 0.3886
+
+→ out/diffusion/round144-film/style-separation-film.json

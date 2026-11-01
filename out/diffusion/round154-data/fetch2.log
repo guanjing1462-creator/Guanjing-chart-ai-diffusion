@@ -1,0 +1,34 @@
+已有 ok 48 包 / 累计下载 798.6MB / skip 22 / fail 0
+  [search] 'stamina 4k' http=200 结果 50 4K 50 候选累计 50  9s
+  [search] 'jumpstream' http=200 结果 50 4K 50 候选累计 100  24s
+  [search] '4k mania' http=200 结果 50 4K 47 候选累计 147  24s
+  [search] 'tech 4k' http=200 结果 50 4K 49 候选累计 194  30s
+  [search] '4k' http=200 结果 0 4K 0 候选累计 194  30s
+  [search] 'jack 4k' http=200 结果 0 4K 0 候选累计 194  30s
+  [search] 'LN 4k' http=0 结果 0 4K 0 候选累计 194  30s
+  [search] 'stream 4k' http=0 结果 0 4K 0 候选累计 194  30s
+  [search] '4k dan' http=200 结果 50 4K 50 候选累计 241  31s
+  [search] 'mania 4k' http=200 结果 0 4K 0 候选累计 241  39s
+  [search] 'modcharts 4k' http=200 结果 23 4K 14 候选累计 255  43s
+  [search] 'osu!mania 4k' http=200 结果 50 4K 45 候选累计 293  47s
+  [search] '4k stamina' http=200 结果 50 4K 50 候选累计 330  50s
+  [search] '4k ln' http=200 结果 50 4K 50 候选累计 379  54s
+  [search] 'handstream' http=200 结果 0 4K 0 候选累计 379  55s
+  [search] 'speed 4k' http=200 结果 0 4K 0 候选累计 379  60s
+  [search] '4k ranked' http=0 结果 0 4K 0 候选累计 379  60s
+  [search] 'chordjack 4k' http=200 结果 0 4K 0 候选累计 379  60s
+  [search] '4k vsrg' http=200 结果 50 4K 41 候选累计 418  61s
+  [search] '4k stream' http=200 结果 50 4K 50 候选累计 462  61s
+  [search] '4k jumpstream' http=200 结果 0 4K 0 候选累计 462  62s
+  [search] '4k tech' http=200 结果 50 4K 49 候选累计 486  67s
+  [search] '4k speed' http=200 结果 50 4K 50 候选累计 527  75s
+  [search] '4k jack' http=0 结果 0 4K 0 候选累计 527  77s
+  [search] '4k vibro' http=0 结果 0 4K 0 候选累计 527  90s
+
+候选 4K mania set 527（已下载 16，新增可下 511）；搜索用时 90s
+  [fail] 2482535 下载失败 http=503 size=52
+  [fail] 2495280 下载失败 http=0 size=0
+  [fail] 2434983 下载失败 http=0 size=0
+  [fail] 2480345 zip 损坏 File is not a zip file
+  [fail] 2444755 zip 损坏 File is not a zip file
+  [fail] 2183312 下载失败 http=0 size=0

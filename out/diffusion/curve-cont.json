@@ -1,0 +1,72 @@
+{
+ "ckpt": "out/models/diffusion32-cont.pt",
+ "style": 1,
+ "num": 4,
+ "thr": 0.2,
+ "bpm": 200.0,
+ "rows": [
+  {
+   "cond": 0.1,
+   "diff_median": 12.62,
+   "diff_all": [
+    12.62
+   ],
+   "below_scope": 0,
+   "pattern": "jack",
+   "tier": "Gamma low",
+   "saved": [
+    "out/diffusion/cal-0.1.osu"
+   ]
+  },
+  {
+   "cond": 0.3,
+   "diff_median": 13.65,
+   "diff_all": [
+    13.65
+   ],
+   "below_scope": 0,
+   "pattern": "stamina",
+   "tier": "Delta low",
+   "saved": [
+    "out/diffusion/cal-0.3.osu"
+   ]
+  },
+  {
+   "cond": 0.5,
+   "diff_median": 14.95,
+   "diff_all": [
+    14.95
+   ],
+   "below_scope": 0,
+   "pattern": "jack",
+   "tier": "Epsilon mid",
+   "saved": [
+    "out/diffusion/cal-0.5.osu"
+   ]
+  },
+  {
+   "cond": 0.7,
+   "diff_median": 16.51,
+   "diff_all": [
+    16.51
+   ],
+   "below_scope": 0,
+   "pattern": "jack",
+   "tier": "Thaumiel Eta low",
+   "saved": [
+    "out/diffusion/cal-0.7.osu"
+   ]
+  },
+  {
+   "cond": 0.9,
+   "diff_median": null,
+   "diff_all": [],
+   "below_scope": 1,
+   "pattern": "jack",
+   "tier": "> Emik Zeta high",
+   "saved": [
+    "out/diffusion/cal-0.9.osu"
+   ]
+  }
+ ]
+}

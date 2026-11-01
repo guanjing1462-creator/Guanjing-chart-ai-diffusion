@@ -1,0 +1,102 @@
+{
+ "out/diffusion/round138-train/diffusion32-gj-grouped.pt": {
+  "ckpt": "out/diffusion/round138-train/diffusion32-gj-grouped.pt",
+  "style_cond": "additive",
+  "val": 0.06597290933132172,
+  "epoch": 9,
+  "params": 439524,
+  "params_style_path": null,
+  "t": 100,
+  "n_windows": 1024,
+  "seed": 4242,
+  "pred": "x0",
+  "cross_style_mae": 0.031315,
+  "cross_style_pairs": {
+   "tech-jack": 0.038441,
+   "tech-speed": 0.020929,
+   "tech-stamina": 0.034515,
+   "jack-speed": 0.035949,
+   "jack-stamina": 0.029069,
+   "speed-stamina": 0.028987
+  },
+  "same_style_other_noise_mae": 0.141788,
+  "style_over_noise": 0.2209,
+  "x0_std": 0.387932,
+  "cross_style_over_x0std": 0.0807,
+  "swap_style": {
+   "own_style_loss": 0.065973,
+   "wrong_style_loss": 0.067308,
+   "delta": 0.001335,
+   "delta_rel": 0.0202,
+   "per_style_delta": {
+    "tech": 0.001331,
+    "jack": 0.001345,
+    "speed": 0.001826,
+    "stamina": 0.001088
+   },
+   "note": "同一份固定 t/噪声（seed 1234）下，用错 style 标签的 val 损失 - 用对标签的损失；差值越接近 0，说明模型几乎不用 style"
+  }
+ },
+ "out/diffusion/round144-film/diffusion32-film-last.pt": {
+  "ckpt": "out/diffusion/round144-film/diffusion32-film-last.pt",
+  "style_cond": "film",
+  "val": 0.06744462251663208,
+  "epoch": 9,
+  "params": 596388,
+  "params_style_path": 156864,
+  "t": 100,
+  "n_windows": 1024,
+  "seed": 4242,
+  "pred": "x0",
+  "cross_style_mae": 0.033329,
+  "cross_style_pairs": {
+   "tech-jack": 0.043314,
+   "tech-speed": 0.01824,
+   "tech-stamina": 0.030453,
+   "jack-speed": 0.041926,
+   "jack-stamina": 0.038162,
+   "speed-stamina": 0.027876
+  },
+  "same_style_other_noise_mae": 0.14419,
+  "style_over_noise": 0.2311,
+  "x0_std": 0.387932,
+  "cross_style_over_x0std": 0.0859,
+  "swap_style": {
+   "own_style_loss": 0.067445,
+   "wrong_style_loss": 0.069044,
+   "delta": 0.001599,
+   "delta_rel": 0.0237,
+   "per_style_delta": {
+    "tech": 0.001115,
+    "jack": 0.002016,
+    "speed": 0.001601,
+    "stamina": 0.001673
+   },
+   "note": "同一份固定 t/噪声（seed 1234）下，用错 style 标签的 val 损失 - 用对标签的损失；差值越接近 0，说明模型几乎不用 style"
+  },
+  "ckpt_style_probe": {
+   "t": 100,
+   "n": 1024,
+   "noise_seed": 4242,
+   "cross_style_mae": 0.033329,
+   "cross_style_pairs": {
+    "tech-jack": 0.043314,
+    "tech-speed": 0.01824,
+    "tech-stamina": 0.030453,
+    "jack-speed": 0.041926,
+    "jack-stamina": 0.038162,
+    "speed-stamina": 0.027876
+   },
+   "same_style_other_noise_mae": 0.14419,
+   "style_over_noise": 0.2311,
+   "x0_std": 0.387932,
+   "cross_style_over_x0std": 0.0859
+  },
+  "val_per_style": {
+   "tech": 0.077143,
+   "jack": 0.065781,
+   "speed": 0.072545,
+   "stamina": 0.060626
+  }
+ }
+}

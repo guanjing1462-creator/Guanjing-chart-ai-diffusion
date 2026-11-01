@@ -1,0 +1,54 @@
+▶ 采样（LN 版 8 通道）：style=2 diff=0.455 num=5 T=200 base=48 参数 0.44M
+  权重：out/diffusion/round147-ln/baseline/model.pt
+  ckpt LN 元数据：{'lambda': 1.0, 'mode': 'baseline', 'loss': 'occ_mse + lambda * ln_body_mse', 'val_occ': 0.070294, 'val_ln': 0.000316}
+[占位率标定] 目标 0.2223 → 占用阈值 0.1874
+
+=== 采样统计（LN 版）===
+{
+ "窗口数": 5,
+ "占位率": 0.2223,
+ "非空行比例": 0.5523,
+ "每窗口音符数": [
+  220,
+  237,
+  237,
+  218,
+  226
+ ],
+ "LN体占位率": 0.0,
+ "LN头数": 0,
+ "LN体格数": 0,
+ "LN头数_每窗均值": 0.0,
+ "LN体格数_每窗均值": 0.0,
+ "有LN窗口占比": 0.0,
+ "LN长度分布": {
+  "n": 0
+ },
+ "每窗口时长_s": 9.6,
+ "LN概率": {
+  "均值": -0.0027,
+  "q50": -0.0029,
+  "q90": 0.0192,
+  "q99": 0.0407,
+  "q999": 0.0608,
+  "最大": 0.0696,
+  ">0.5格数": 0,
+  ">0.3格数": 0
+ },
+ "耗时_s": 20.52,
+ "扩散步数": 200,
+ "占用阈值": 0.18742058357745425,
+ "占用阈值来源": "target-occ",
+ "LN阈值": 0.5,
+ "target_occ": 0.2223,
+ "style": 2,
+ "diff条件": 0.455,
+ "ckpt": "out/diffusion/round147-ln/baseline/model.pt"
+}
+  LN 头数/窗 [0, 0, 0, 0, 0]
+  LN 体格/窗 [0, 0, 0, 0, 0]
+  LN 长度/窗 [[], [], [], [], []]
+
+钢琴卷 → out/diffusion/round147-ln/samples/baseline-s2/roll-ln-s2d0.455-t0.5-seed147-*.npy
+打包 → out/diffusion/round147-ln/samples/baseline-s2/rolls-ln-s2d0.455-t0.5-seed147.npz
+统计 → out/diffusion/round147-ln/samples/baseline-s2/sample-meta-ln-s2d0.455-t0.5-seed147.json

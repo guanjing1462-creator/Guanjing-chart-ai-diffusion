@@ -1,0 +1,6 @@
+{"epoch": 1, "train": 0.12637347728013992, "val": 0.10285121947526932, "val_group_mean": 0.10462354868650436, "sec": 195.4, "batches": 250, "ms_per_batch": 771, "train_windows": 8000, "lr": 0.00019397}
+{"epoch": 2, "train": 0.1025388905107975, "val": 0.0913051962852478, "val_group_mean": 0.09258820861577988, "sec": 162.5, "batches": 250, "ms_per_batch": 616, "train_windows": 8000, "lr": 0.0001766}
+{"epoch": 3, "train": 0.0946923710256815, "val": 0.08634590357542038, "val_group_mean": 0.0875425636768341, "sec": 154.0, "batches": 250, "ms_per_batch": 572, "train_windows": 8000, "lr": 0.00015}
+{"epoch": 4, "train": 0.09204985585808755, "val": 0.08549217134714127, "val_group_mean": 0.08720263093709946, "sec": 206.8, "batches": 250, "ms_per_batch": 564, "train_windows": 8000, "lr": 0.00011736}
+{"epoch": 5, "train": 0.09126210321485996, "val": 0.08430055528879166, "val_group_mean": 0.08621138334274292, "sec": 197.9, "batches": 250, "ms_per_batch": 701, "train_windows": 8000, "lr": 8.264e-05}
+{"epoch": 6, "train": 0.08950621610879898, "val": 0.0880151242017746, "val_group_mean": 0.08980070799589157, "sec": 189.1, "batches": 250, "ms_per_batch": 678, "train_windows": 8000, "lr": 5e-05}

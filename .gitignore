@@ -1,0 +1,22 @@
+# 大体积原始数据（不入库）
+out/packs/
+out/audio-dl/
+out/audio-dl-fixed/
+ref/
+out/multisong/
+out/all/
+out/tiers-*/
+out/eval/
+out/audio-cond/
+# 缓存
+__pycache__/
+*.pyc
+.gj-cache/
+# 临时产物
+*.tmp
+/tmp/
+# 大 osz/音频
+*.osz
+*.ogg
+*.mp3
+*.wav

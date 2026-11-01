@@ -1,0 +1,70 @@
+test_audio_training_alignment_b (test_diffusion32_consistency.CheckpointConsistency.test_audio_training_alignment_b) ... ok
+test_audio_training_alignment_c (test_diffusion32_consistency.CheckpointConsistency.test_audio_training_alignment_c) ... ok
+test_continuous_ddpm_is_repeatable_and_not_integer_quantized (test_diffusion32_consistency.CheckpointConsistency.test_continuous_ddpm_is_repeatable_and_not_integer_quantized) ... ok
+test_frequency_is_persistent_buffer (test_diffusion32_consistency.CheckpointConsistency.test_frequency_is_persistent_buffer) ... ok
+test_invalid_targets_and_conditions_fail_before_sampling (test_diffusion32_consistency.CheckpointConsistency.test_invalid_targets_and_conditions_fail_before_sampling) ... ok
+test_legacy_raw_state_requires_explicit_prediction (test_diffusion32_consistency.CheckpointConsistency.test_legacy_raw_state_requires_explicit_prediction) ... ok
+test_only_strict_load_attempted (test_diffusion32_consistency.CheckpointConsistency.test_only_strict_load_attempted) ... ok
+test_prediction_override_cannot_mislabel_checkpoint (test_diffusion32_consistency.CheckpointConsistency.test_prediction_override_cannot_mislabel_checkpoint) ... ok
+test_real_checkpoint_b_bal (test_diffusion32_consistency.CheckpointConsistency.test_real_checkpoint_b_bal) ... EVIDENCE train_diffusion32b/bal: max_forward_error=0, reload_seed_delta=0, diff_0.30_to_0.31_max=0.00911349058, diff_0.30_to_0.70_max=0.338927627
+ok
+test_real_checkpoint_b_cont (test_diffusion32_consistency.CheckpointConsistency.test_real_checkpoint_b_cont) ... EVIDENCE train_diffusion32b/cont: max_forward_error=0, reload_seed_delta=0, diff_0.30_to_0.31_max=0.0085093081, diff_0.30_to_0.70_max=0.295649052
+ok
+test_real_checkpoint_c_bal (test_diffusion32_consistency.CheckpointConsistency.test_real_checkpoint_c_bal) ... EVIDENCE train_diffusion32c/bal: max_forward_error=0, reload_seed_delta=0, diff_0.30_to_0.31_max=0.00911349058, diff_0.30_to_0.70_max=0.338927627
+ok
+test_real_checkpoint_c_cont (test_diffusion32_consistency.CheckpointConsistency.test_real_checkpoint_c_cont) ... EVIDENCE train_diffusion32c/cont: max_forward_error=0, reload_seed_delta=0, diff_0.30_to_0.31_max=0.0085093081, diff_0.30_to_0.70_max=0.295649052
+ok
+test_reject_fractional_timesteps (test_diffusion32_consistency.CheckpointConsistency.test_reject_fractional_timesteps) ... ok
+test_reject_missing_core_weight (test_diffusion32_consistency.CheckpointConsistency.test_reject_missing_core_weight) ... ok
+test_reject_missing_frequency (test_diffusion32_consistency.CheckpointConsistency.test_reject_missing_frequency) ... ok
+test_reject_missing_prediction (test_diffusion32_consistency.CheckpointConsistency.test_reject_missing_prediction) ... ok
+test_reject_nan_frequency (test_diffusion32_consistency.CheckpointConsistency.test_reject_nan_frequency) ... ok
+test_reject_negative_cond_metadata (test_diffusion32_consistency.CheckpointConsistency.test_reject_negative_cond_metadata) ... ok
+test_reject_non_tensor_state (test_diffusion32_consistency.CheckpointConsistency.test_reject_non_tensor_state) ... ok
+test_reject_nonfinite_core_weight (test_diffusion32_consistency.CheckpointConsistency.test_reject_nonfinite_core_weight) ... ok
+test_reject_unexpected_weight (test_diffusion32_consistency.CheckpointConsistency.test_reject_unexpected_weight) ... ok
+test_reject_unknown_model_type (test_diffusion32_consistency.CheckpointConsistency.test_reject_unknown_model_type) ... ok
+test_reject_unknown_prediction (test_diffusion32_consistency.CheckpointConsistency.test_reject_unknown_prediction) ... ok
+test_reject_wrong_base_metadata (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_base_metadata) ... ok
+test_reject_wrong_cond_channels (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_cond_channels) ... ok
+test_reject_wrong_cond_metadata (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_cond_metadata) ... ok
+test_reject_wrong_core_shape (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_core_shape) ... ok
+test_reject_wrong_frequency_shape (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_frequency_shape) ... ok
+test_reject_wrong_grid (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_grid) ... ok
+test_reject_wrong_rows (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_rows) ... ok
+test_reject_wrong_temb_metadata (test_diffusion32_consistency.CheckpointConsistency.test_reject_wrong_temb_metadata) ... ok
+test_reject_zero_timesteps (test_diffusion32_consistency.CheckpointConsistency.test_reject_zero_timesteps) ... ok
+test_sampler_uses_checkpoint_prediction_by_default (test_diffusion32_consistency.CheckpointConsistency.test_sampler_uses_checkpoint_prediction_by_default) ... ok
+test_shape_inference_preserves_legacy_audio_checkpoint (test_diffusion32_consistency.CheckpointConsistency.test_shape_inference_preserves_legacy_audio_checkpoint) ... ok
+test_target_roundtrip_and_step_b_eps (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_b_eps) ... ok
+test_target_roundtrip_and_step_b_v (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_b_v) ... ok
+test_target_roundtrip_and_step_b_x0 (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_b_x0) ... ok
+test_target_roundtrip_and_step_c_eps (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_c_eps) ... ok
+test_target_roundtrip_and_step_c_v (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_c_v) ... ok
+test_target_roundtrip_and_step_c_x0 (test_diffusion32_consistency.CheckpointConsistency.test_target_roundtrip_and_step_c_x0) ... ok
+test_cond_zero_overrides_cond_file_and_metadata (test_diffusion32_consistency.CliConsistency.test_cond_zero_overrides_cond_file_and_metadata) ... ERROR
+test_fractional_diff_and_prediction_persist_without_writing_rolls (test_diffusion32_consistency.CliConsistency.test_fractional_diff_and_prediction_persist_without_writing_rolls) ... ok
+test_invalid_diff_rejected_before_loading (test_diffusion32_consistency.CliConsistency.test_invalid_diff_rejected_before_loading) ... ok
+test_koishi_failure_is_not_interpreted_as_low_difficulty (test_diffusion32_consistency.CliConsistency.test_koishi_failure_is_not_interpreted_as_low_difficulty) ... ok
+test_target_default_bypasses_unverified_curve_and_passes_prediction (test_diffusion32_consistency.CliConsistency.test_target_default_bypasses_unverified_curve_and_passes_prediction) ... ok
+test_target_not_reaching_tolerance_has_nonzero_status (test_diffusion32_consistency.CliConsistency.test_target_not_reaching_tolerance_has_nonzero_status) ... ok
+test_target_passes_fractional_condition_prediction_bpm_and_seed (test_diffusion32_consistency.CliConsistency.test_target_passes_fractional_condition_prediction_bpm_and_seed) ... ok
+test_target_preserves_sampler_strict_error (test_diffusion32_consistency.CliConsistency.test_target_preserves_sampler_strict_error) ... ok
+
+======================================================================
+ERROR: test_cond_zero_overrides_cond_file_and_metadata (test_diffusion32_consistency.CliConsistency.test_cond_zero_overrides_cond_file_and_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/work/yamero-ai/proj/tests/test_diffusion32_consistency.py", line 367, in test_cond_zero_overrides_cond_file_and_metadata
+    self.assertIn('-czero', opened.call_args.args[0])
+                            ~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+
+----------------------------------------------------------------------
+Ran 48 tests in 12.066s
+
+FAILED (errors=1)
+
+real	0m21.851s
+user	0m6.879s
+sys	0m2.608s

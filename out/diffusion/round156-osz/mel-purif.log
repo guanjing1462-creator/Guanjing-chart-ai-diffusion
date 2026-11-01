@@ -1,0 +1,6 @@
+/usr/local/lib/python3.12/dist-packages/joblib/_multiprocessing_helpers.py:44: UserWarning: [Errno 2] No such file or directory.  joblib will operate in serial mode
+  warnings.warn("%s.  joblib will operate in serial mode" % (e,))
+音频 ref/multisong/seatrus - purifikation.ogg：150.5s，bpm 185.01 → 1/32 格 40.54ms，3714 格（有效 3714）
+条件 (3714, 32) float16：均值 0.1928，>0 占 86.4%，通道 P99 中位 0.5237
+自证：条件总强度 vs onset 包络 r=-0.116（同格聚合后同向），lag1 r=-0.099
+写出 out/diffusion/round156-osz/mel-purifikation.npz（0.21MB），用时 47.5s

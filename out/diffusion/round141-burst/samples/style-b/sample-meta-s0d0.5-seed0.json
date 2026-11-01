@@ -1,0 +1,87 @@
+{
+ "style": 0,
+ "diff": 0.5,
+ "num": 5,
+ "seed": 0,
+ "threshold": 0.6299331588983537,
+ "target_occ": 0.1924,
+ "bpm": 136.3,
+ "step_ms": 55.0257,
+ "win": 256,
+ "timesteps": 200,
+ "random_weights": false,
+ "pred": "x0",
+ "weights": {
+  "权重": "out/diffusion/round141-burst/style-b/diffusion32-burst-style-b-last.pt",
+  "加载方式": "strict",
+  "base": 48,
+  "temb_dim": 128,
+  "timesteps": 200,
+  "cond_dim": 0,
+  "pred": "x0",
+  "difficulty_condition": {
+   "type": "occupancy-percentile-v1",
+   "lo": 0.0625,
+   "hi": 0.36328125,
+   "percentiles": [
+    5,
+    95
+   ],
+   "range": [
+    0.0,
+    1.0
+   ],
+   "fit_on": "train split only (split==0)"
+  },
+  "训练验证损失": 0.06953
+ },
+ "cond": null,
+ "stats": {
+  "窗口数": 5,
+  "占位率": 0.1924,
+  "非空行比例": 0.6617,
+  "每行平均音符数": 0.77,
+  "非空行平均和弦": 1.163,
+  "最大和弦": 3,
+  "各列占位率": [
+   0.1719,
+   0.2313,
+   0.2141,
+   0.1523
+  ],
+  "每窗口音符数": [
+   196,
+   198,
+   199,
+   198,
+   194
+  ],
+  "1/32占比_p132": 0.5914,
+  "半格内容_off_parity": 0.4262,
+  "每窗口时长_s": 14.087,
+  "音符密度_nps": 13.985,
+  "行密度_rps": 12.026,
+  "原始概率": {
+   "均值": 0.2387,
+   "标准差": 0.4172,
+   "最小": -0.2797,
+   "最大": 1.7229,
+   "q10": -0.0964,
+   "q50": 0.0444,
+   "q90": 1.0134
+  },
+  "耗时_s": 27.85,
+  "每窗口耗时_s": 5.57,
+  "扩散步数": 200,
+  "阈值": 0.6299331588983537,
+  "阈值来源": "target-occ",
+  "目标占位率": 0.1924
+ },
+ "files": [
+  "roll-s0d0.5-seed0-00.npy",
+  "roll-s0d0.5-seed0-01.npy",
+  "roll-s0d0.5-seed0-02.npy",
+  "roll-s0d0.5-seed0-03.npy",
+  "roll-s0d0.5-seed0-04.npy"
+ ]
+}

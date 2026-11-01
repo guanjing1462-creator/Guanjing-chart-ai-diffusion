@@ -1,0 +1,47 @@
+评估窗口 24 个（split==1，6 首歌，占位率 0.016–0.781）
+/root/work/yamero-ai/proj/tools/eval-mel-follow.py:179: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ck = torch.load(os.path.join(ROOT, path), map_location='cpu')
+  权重 out/models/r151-M-melflux.pt（cond_key=M, 通道 32, cond_dim=32, pred=x0, val=0.08461）
+▶ 采样 配对（24 窗 × 200 步）…
+  完成 41s，平均占用 0.177
+▶ 采样 错配（24 窗 × 200 步）…
+  完成 40s，平均占用 0.176
+▶ 采样 零条件（24 窗 × 200 步）…
+  完成 41s，平均占用 0.166
+▶ 采样 条件+1格（24 窗 × 200 步）…
+  完成 41s，平均占用 0.181
+▶ 采样 条件-1格（24 窗 × 200 步）…
+  完成 43s，平均占用 0.177
+  人类平均占用 0.230；校准阈值 配对=0.368，错配=0.366，零条件=0.335，条件+1格=0.372，条件-1格=0.364
+
+=== 采音指标（mel；r 中位，n=24）===
+组                               r250   r1000     占用     音符
+人类                             0.338   0.504  0.230    235
+配对                             0.132   0.103  0.177    181
+错配                             0.145   0.167  0.176    180
+零条件                            0.013   0.024  0.166    170
+条件+1格·对其给定条件                   0.056   0.022  0.181    184
+条件+1格·对真条件                     0.065   0.047  0.181    184
+条件-1格·对其给定条件                   0.087   0.079  0.177    180
+条件-1格·对真条件                     0.094   0.106  0.177    180
+配对·事后错配条件                      0.103  -0.060  0.177    181
+配对·占用校准                        0.198   0.109  0.230    235
+错配·占用校准                        0.132   0.230  0.230    235
+零条件·占用校准                       0.028   0.007  0.230    235
+
+=== 配对差值（逐窗；主判据是「配对−错配」）===
+  配对 − 错配 @r250: 中位 +0.0129，均值 -0.0114，12/24 胜，p=1.00e+00
+  配对 − 错配 @r1000: 中位 +0.0139，均值 -0.0262，14/24 胜，p=5.41e-01
+  配对 − 零条件 @r250: 中位 +0.1429，均值 +0.1358，21/24 胜，p=2.77e-04
+  配对·校准 − 错配·校准 @r250: 中位 +0.0238，均值 +0.0070，15/24 胜，p=3.07e-01
+  配对·校准 − 错配·校准 @r1000: 中位 -0.0093，均值 +0.0369，12/24 胜，p=1.00e+00
+  配对·校准 − 零条件·校准 @r250: 中位 +0.1424，均值 +0.1491，22/24 胜，p=3.60e-05
+  配对 − 人类 @r250: 中位 -0.2787，均值 -0.2016，7/24 胜，p=6.39e-02
+  配对·校准 − 人类 @r250: 中位 -0.2375，均值 -0.1795，5/24 胜，p=6.61e-03
+  条件+1格·对其给定条件 − 配对 @r250: 中位 -0.0771，均值 -0.1180，5/24 胜，p=6.61e-03
+  条件-1格·对其给定条件 − 配对 @r250: 中位 -0.0491，均值 -0.0751，7/24 胜，p=6.39e-02
+  条件+1格·对真条件 − 配对 @r250: 中位 -0.0628，均值 -0.0682，5/24 胜，p=6.61e-03
+  条件-1格·对真条件 − 配对 @r250: 中位 -0.0405，均值 -0.0615，2/24 胜，p=3.60e-05
+
+总用时 208s
+写出 out/diffusion/round151-mel/eval-mel.json

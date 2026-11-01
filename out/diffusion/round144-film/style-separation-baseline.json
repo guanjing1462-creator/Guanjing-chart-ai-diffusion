@@ -1,0 +1,159 @@
+{
+ "label": "baseline",
+ "ckpt": "out/diffusion/round138-train/diffusion32-gj-grouped.pt",
+ "num_per_style": 5,
+ "diff": 0.5,
+ "seed": 0,
+ "sample_seed": 0,
+ "target_occ": {
+  "tech": 0.1924,
+  "jack": 0.2259,
+  "speed": 0.1939,
+  "stamina": 0.178
+ },
+ "outdir": "out/diffusion/round144-film/samples/baseline",
+ "protocol": "同一 sample-seed（噪声逐元素相同）+ 同一 diff=0.5，只改 style；按该风格数据集占位率反解阈值（密度对齐）；p132 = 相邻占用行间隔==1 的比例，跨窗口池化（与 round141/143 报表同口径）",
+ "per_style": {
+  "tech": {
+   "窗口数": 5,
+   "占位率": 0.1924,
+   "p132": 0.3962,
+   "间隔数": 684,
+   "非空行比例": 0.5383,
+   "每窗音符数": 197.0,
+   "邻接覆盖_lane": 0.0,
+   "邻接覆盖_row": 0.4589,
+   "原始占位率@0.5": 0.1742,
+   "原始p132@0.5": 0.3207,
+   "数据集p132": 0.5103,
+   "数据集占位率": 0.1924,
+   "p132减数据集": -0.1141
+  },
+  "jack": {
+   "窗口数": 5,
+   "占位率": 0.226,
+   "p132": 0.0923,
+   "间隔数": 542,
+   "非空行比例": 0.4273,
+   "每窗音符数": 231.4,
+   "邻接覆盖_lane": 0.0199,
+   "邻接覆盖_row": 0.0985,
+   "原始占位率@0.5": 0.1869,
+   "原始p132@0.5": 0.027,
+   "数据集p132": 0.0608,
+   "数据集占位率": 0.2259,
+   "p132减数据集": 0.0315
+  },
+  "speed": {
+   "窗口数": 5,
+   "占位率": 0.1939,
+   "p132": 0.3562,
+   "间隔数": 671,
+   "非空行比例": 0.5281,
+   "每窗音符数": 198.6,
+   "邻接覆盖_lane": 0.0,
+   "邻接覆盖_row": 0.3938,
+   "原始占位率@0.5": 0.1822,
+   "原始p132@0.5": 0.325,
+   "数据集p132": 0.6139,
+   "数据集占位率": 0.1939,
+   "p132减数据集": -0.2577
+  },
+  "stamina": {
+   "窗口数": 5,
+   "占位率": 0.1781,
+   "p132": 0.0208,
+   "间隔数": 578,
+   "非空行比例": 0.4555,
+   "每窗音符数": 182.4,
+   "邻接覆盖_lane": 0.0,
+   "邻接覆盖_row": 0.0186,
+   "原始占位率@0.5": 0.1943,
+   "原始p132@0.5": 0.0348,
+   "数据集p132": 0.116,
+   "数据集占位率": 0.178,
+   "p132减数据集": -0.0952
+  }
+ },
+ "pairwise_mae": {
+  "tech-jack": {
+   "mae": 0.143025,
+   "mae_rel": 0.6334,
+   "scale_mean_abs_P": 0.2258
+  },
+  "tech-speed": {
+   "mae": 0.063344,
+   "mae_rel": 0.2806,
+   "scale_mean_abs_P": 0.2257
+  },
+  "tech-stamina": {
+   "mae": 0.150429,
+   "mae_rel": 0.6614,
+   "scale_mean_abs_P": 0.2274
+  },
+  "jack-speed": {
+   "mae": 0.129404,
+   "mae_rel": 0.5665,
+   "scale_mean_abs_P": 0.2284
+  },
+  "jack-stamina": {
+   "mae": 0.119667,
+   "mae_rel": 0.52,
+   "scale_mean_abs_P": 0.2301
+  },
+  "speed-stamina": {
+   "mae": 0.129132,
+   "mae_rel": 0.5614,
+   "scale_mean_abs_P": 0.23
+  }
+ },
+ "pairwise_hamming": {
+  "tech-jack": 0.1281,
+  "tech-speed": 0.0422,
+  "tech-stamina": 0.1119,
+  "jack-speed": 0.1152,
+  "jack-stamina": 0.1096,
+  "speed-stamina": 0.0955
+ },
+ "cross_style_mae_mean": 0.1225,
+ "cross_style_mae_rel_mean": 0.5372,
+ "cross_style_hamming_mean": 0.1004,
+ "same_style_other_noise_mae": {
+  "tech": 0.316276,
+  "jack": 0.279946,
+  "speed": 0.308745,
+  "stamina": 0.284152
+ },
+ "cross_noise_mae_mean": 0.29728,
+ "style_over_noise": 0.4121,
+ "p132": {
+  "tech": 0.3962,
+  "jack": 0.0923,
+  "speed": 0.3562,
+  "stamina": 0.0208
+ },
+ "p132_desc": [
+  "tech",
+  "speed",
+  "jack",
+  "stamina"
+ ],
+ "dataset_p132_desc": [
+  "speed",
+  "tech",
+  "stamina",
+  "jack"
+ ],
+ "order_matches_dataset": false,
+ "ratio_tech_over_jack": 4.29,
+ "dataset_ratio_tech_over_jack": 8.39,
+ "cluster_gap_mean": 0.3196,
+ "cluster_gap_dataset": 0.4737,
+ "max_abs_delta_vs_dataset": 0.2577,
+ "_dataset_p132_ref": {
+  "tech": 0.5103,
+  "jack": 0.0608,
+  "speed": 0.6139,
+  "stamina": 0.116
+ }
+}

@@ -1,0 +1,9 @@
+{"epoch": 1, "train": 0.09696736925840378, "val": 0.08125396817922592, "val_group_mean": 0.08153086155653, "sec": 195.4, "batches": 250, "ms_per_batch": 792, "train_windows": 8000, "lr": 0.00019659}
+{"epoch": 2, "train": 0.07819677942991257, "val": 0.0756380707025528, "val_group_mean": 0.07586444169282913, "sec": 206.8, "batches": 250, "ms_per_batch": 673, "train_windows": 8000, "lr": 0.0001866}
+{"epoch": 3, "train": 0.07297624930739403, "val": 0.07278355956077576, "val_group_mean": 0.07331234216690063, "sec": 292.1, "batches": 250, "ms_per_batch": 1402, "train_windows": 8000, "lr": 0.00017071}
+{"epoch": 4, "train": 0.07088896176218987, "val": 0.06982738524675369, "val_group_mean": 0.07057580351829529, "sec": 247.7, "batches": 250, "ms_per_batch": 958, "train_windows": 8000, "lr": 0.00015}
+{"epoch": 5, "train": 0.06863622400164604, "val": 0.06843689829111099, "val_group_mean": 0.06922918558120728, "sec": 335.5, "batches": 250, "ms_per_batch": 737, "train_windows": 8000, "lr": 0.00012588}
+{"epoch": 6, "train": 0.06808171984553336, "val": 0.06739702820777893, "val_group_mean": 0.06831014901399612, "sec": 291.1, "batches": 250, "ms_per_batch": 1420, "train_windows": 8000, "lr": 0.0001}
+{"epoch": 7, "train": 0.06706873039901257, "val": 0.06672079861164093, "val_group_mean": 0.06756448745727539, "sec": 261.2, "batches": 250, "ms_per_batch": 1188, "train_windows": 8000, "lr": 7.412e-05}
+{"epoch": 8, "train": 0.06535478004813194, "val": 0.06615037471055984, "val_group_mean": 0.06702607125043869, "sec": 251.2, "batches": 250, "ms_per_batch": 1110, "train_windows": 8000, "lr": 5e-05}
+{"epoch": 9, "train": 0.06729624357819557, "val": 0.06597290933132172, "val_group_mean": 0.06690659373998642, "sec": 264.2, "batches": 250, "ms_per_batch": 943, "train_windows": 8000, "lr": 2.929e-05}

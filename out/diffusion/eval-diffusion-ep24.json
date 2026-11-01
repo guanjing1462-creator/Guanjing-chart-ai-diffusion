@@ -1,0 +1,595 @@
+{
+ "meta": {
+  "script": "tools/eval-generated.py",
+  "label": "扩散-ep24",
+  "n_charts": 4,
+  "pack_sample": null,
+  "seed": 0,
+  "elapsed_s": 0.2,
+  "centroids": {
+   "tech": {
+    "n": 19,
+    "probs": {
+     "tech": 0.2343,
+     "jack": 0.0471,
+     "speed": 0.4183,
+     "stamina": 0.2995,
+     "ln": 0.0008
+    },
+    "source": "/tmp/d_tech.json"
+   },
+   "jack": {
+    "n": 20,
+    "probs": {
+     "tech": 0.03,
+     "jack": 0.9355,
+     "speed": 0.0208,
+     "stamina": 0.0135,
+     "ln": 0.0001
+    },
+    "source": "/tmp/d_jack.json"
+   },
+   "speed": {
+    "n": 20,
+    "probs": {
+     "tech": 0.1792,
+     "jack": 0.0015,
+     "speed": 0.375,
+     "stamina": 0.4437,
+     "ln": 0.0004
+    },
+    "source": "/tmp/d_speed.json"
+   },
+   "stamina": {
+    "n": 19,
+    "probs": {
+     "tech": 0.0228,
+     "jack": 0.6569,
+     "speed": 0.1725,
+     "stamina": 0.1468,
+     "ln": 0.0006
+    },
+    "source": "/tmp/d_stamina.json"
+   }
+  },
+  "notes": [
+   "Koishi pattern 标签不可靠（人类谱自身一致率仅 42~45%），只看 probs/余弦与 diff",
+   "diff 为 null 表示 Koishi 判为低于 11 级（难度模型下限）",
+   "1/32 占比 = 行间隔落在 1/32 拍（±50%）的比例，按谱面 bpm 归一到 1/16 格计数",
+   "手位移 = 相邻行重心列索引差的绝对值均值（单位：列宽）",
+   "行重复率 = 8 行滑窗签名中「重复出现」的比例",
+   "可弹性冲突口径：同列 <55ms；单侧（0/1 或 2/3）55ms 内 ≥3 音；另给「单列最高频率 Hz」——1/16 网格(110ms)下 55ms 冲突不可能触发，只有 1/32 才有，所以 0 冲突不代表好弹，还要看单指要按多快"
+  ]
+ },
+ "charts": [
+  {
+   "file": "out/diffusion/test-real-s2d3.osu",
+   "name": "test-real-s2d3.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 866,
+   "rows": 468,
+   "bpm": 136.3,
+   "song": null,
+   "duration_s": 56.2,
+   "note_rate": 15.4,
+   "row_rate": 8.32,
+   "npr": 1.85,
+   "chord_rate": 0.643,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.54,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.91,
+    "1/8": 0.086,
+    "3/16": 0.004
+   },
+   "hand_shift": 1.024,
+   "repeat8": 0.0,
+   "occupancy": 0.4229,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 9.09,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": null,
+   "tier": "< Alpha Low",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.996,
+    "ln": 0,
+    "speed": 0.002,
+    "stamina": 0.001,
+    "tech": 0.001
+   },
+   "cos": {
+    "tech": 0.085,
+    "jack": 0.999,
+    "speed": 0.005,
+    "stamina": 0.946
+   },
+   "best_pack": "jack",
+   "best_cos": 0.999,
+   "group": "扩散-ep24"
+  },
+  {
+   "file": "out/diffusion/test-real-s2d3-bpm200.osu",
+   "name": "test-real-s2d3-bpm200.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 866,
+   "rows": 468,
+   "bpm": 200.0,
+   "song": null,
+   "duration_s": 38.3,
+   "note_rate": 22.6,
+   "row_rate": 12.21,
+   "npr": 1.85,
+   "chord_rate": 0.643,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.54,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.91,
+    "1/8": 0.086,
+    "3/16": 0.004
+   },
+   "hand_shift": 1.024,
+   "repeat8": 0.0,
+   "occupancy": 0.4229,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 13.33,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": 14.03,
+   "tier": "Delta mid",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.988,
+    "ln": 0,
+    "speed": 0.002,
+    "stamina": 0.004,
+    "tech": 0.006
+   },
+   "cos": {
+    "tech": 0.089,
+    "jack": 0.999,
+    "speed": 0.008,
+    "stamina": 0.946
+   },
+   "best_pack": "jack",
+   "best_cos": 0.999,
+   "group": "扩散-ep24"
+  },
+  {
+   "file": "out/diffusion/s1d2-seed0.osu",
+   "name": "s1d2-seed0.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 422,
+   "rows": 233,
+   "bpm": 136.3,
+   "song": null,
+   "duration_s": 28.1,
+   "note_rate": 15.04,
+   "row_rate": 8.3,
+   "npr": 1.811,
+   "chord_rate": 0.622,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.552,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.918,
+    "1/8": 0.069,
+    "3/16": 0.009,
+    "1/4": 0.004
+   },
+   "hand_shift": 1.015,
+   "repeat8": 0.0,
+   "occupancy": 0.4121,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 9.09,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": null,
+   "tier": "< Alpha Low",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.995,
+    "ln": 0,
+    "speed": 0.003,
+    "stamina": 0.002,
+    "tech": 0.001
+   },
+   "cos": {
+    "tech": 0.087,
+    "jack": 0.999,
+    "speed": 0.006,
+    "stamina": 0.946
+   },
+   "best_pack": "jack",
+   "best_cos": 0.999,
+   "group": "扩散-ep24"
+  },
+  {
+   "file": "/tmp/evalsamp3/diff-ckpt24.osu",
+   "name": "diff-ckpt24.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 408,
+   "rows": 293,
+   "bpm": 136.3,
+   "song": null,
+   "duration_s": 55.8,
+   "note_rate": 7.31,
+   "row_rate": 5.25,
+   "npr": 1.392,
+   "chord_rate": 0.341,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.192,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.668,
+    "1/8": 0.205,
+    "3/16": 0.048,
+    ">=1/2": 0.048,
+    "1/4": 0.031
+   },
+   "hand_shift": 1.15,
+   "repeat8": 0.0,
+   "occupancy": 0.2008,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 9.09,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": null,
+   "tier": "< Alpha Low",
+   "pattern": "speed",
+   "probs": {
+    "jack": 0.023,
+    "ln": 0.001,
+    "speed": 0.872,
+    "stamina": 0.09,
+    "tech": 0.014
+   },
+   "cos": {
+    "tech": 0.796,
+    "jack": 0.05,
+    "speed": 0.693,
+    "stamina": 0.294
+   },
+   "best_pack": "tech",
+   "best_cos": 0.796,
+   "group": "扩散-ep24"
+  }
+ ],
+ "groups": {
+  "扩散-ep24": {
+   "note_rate": {
+    "n": 4,
+    "mean": 15.088,
+    "std": 5.409,
+    "median": 15.22,
+    "p10": 7.31,
+    "p90": 22.6
+   },
+   "row_rate": {
+    "n": 4,
+    "mean": 8.52,
+    "std": 2.47,
+    "median": 8.31,
+    "p10": 5.25,
+    "p90": 12.21
+   },
+   "npr": {
+    "n": 4,
+    "mean": 1.7258,
+    "std": 0.1933,
+    "median": 1.8305,
+    "p10": 1.392,
+    "p90": 1.85
+   },
+   "chord_rate": {
+    "n": 4,
+    "mean": 0.5623,
+    "std": 0.128,
+    "median": 0.6325,
+    "p10": 0.341,
+    "p90": 0.643
+   },
+   "ln_ratio": {
+    "n": 4,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "jack_rate": {
+    "n": 4,
+    "mean": 0.456,
+    "std": 0.1525,
+    "median": 0.54,
+    "p10": 0.192,
+    "p90": 0.552
+   },
+   "p132": {
+    "n": 4,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "hand_shift": {
+    "n": 4,
+    "mean": 1.0533,
+    "std": 0.056,
+    "median": 1.024,
+    "p10": 1.015,
+    "p90": 1.15
+   },
+   "repeat8": {
+    "n": 4,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "occupancy": {
+    "n": 4,
+    "mean": 0.36468,
+    "std": 0.09472,
+    "median": 0.4175,
+    "p10": 0.2008,
+    "p90": 0.4229
+   },
+   "conflicts_per_min": {
+    "n": 4,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "max_col_hz": {
+    "n": 4,
+    "mean": 10.15,
+    "std": 1.836,
+    "median": 9.09,
+    "p10": 9.09,
+    "p90": 13.33
+   },
+   "diff": {
+    "n": 1,
+    "mean": 14.03,
+    "std": 0.0,
+    "median": 14.03,
+    "p10": 14.03,
+    "p90": 14.03
+   },
+   "best_cos": {
+    "n": 4,
+    "mean": 0.9483,
+    "std": 0.0879,
+    "median": 0.999,
+    "p10": 0.796,
+    "p90": 0.999
+   },
+   "cos_tech": {
+    "n": 4,
+    "mean": 0.2642,
+    "std": 0.307,
+    "median": 0.088,
+    "p10": 0.085,
+    "p90": 0.796
+   },
+   "cos_jack": {
+    "n": 4,
+    "mean": 0.7618,
+    "std": 0.4109,
+    "median": 0.999,
+    "p10": 0.05,
+    "p90": 0.999
+   },
+   "cos_speed": {
+    "n": 4,
+    "mean": 0.178,
+    "std": 0.2973,
+    "median": 0.007,
+    "p10": 0.005,
+    "p90": 0.693
+   },
+   "cos_stamina": {
+    "n": 4,
+    "mean": 0.783,
+    "std": 0.2823,
+    "median": 0.946,
+    "p10": 0.294,
+    "p90": 0.946
+   },
+   "pattern_vote": {
+    "jack": 3,
+    "speed": 1
+   },
+   "best_pack_vote": {
+    "jack": 3,
+    "tech": 1
+   },
+   "diff_missing": 3,
+   "n": 4
+  }
+ },
+ "total": {
+  "note_rate": {
+   "n": 4,
+   "mean": 15.088,
+   "std": 5.409,
+   "median": 15.22,
+   "p10": 7.31,
+   "p90": 22.6
+  },
+  "row_rate": {
+   "n": 4,
+   "mean": 8.52,
+   "std": 2.47,
+   "median": 8.31,
+   "p10": 5.25,
+   "p90": 12.21
+  },
+  "npr": {
+   "n": 4,
+   "mean": 1.7258,
+   "std": 0.1933,
+   "median": 1.8305,
+   "p10": 1.392,
+   "p90": 1.85
+  },
+  "chord_rate": {
+   "n": 4,
+   "mean": 0.5623,
+   "std": 0.128,
+   "median": 0.6325,
+   "p10": 0.341,
+   "p90": 0.643
+  },
+  "ln_ratio": {
+   "n": 4,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "jack_rate": {
+   "n": 4,
+   "mean": 0.456,
+   "std": 0.1525,
+   "median": 0.54,
+   "p10": 0.192,
+   "p90": 0.552
+  },
+  "p132": {
+   "n": 4,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "hand_shift": {
+   "n": 4,
+   "mean": 1.0533,
+   "std": 0.056,
+   "median": 1.024,
+   "p10": 1.015,
+   "p90": 1.15
+  },
+  "repeat8": {
+   "n": 4,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "occupancy": {
+   "n": 4,
+   "mean": 0.36468,
+   "std": 0.09472,
+   "median": 0.4175,
+   "p10": 0.2008,
+   "p90": 0.4229
+  },
+  "conflicts_per_min": {
+   "n": 4,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "max_col_hz": {
+   "n": 4,
+   "mean": 10.15,
+   "std": 1.836,
+   "median": 9.09,
+   "p10": 9.09,
+   "p90": 13.33
+  },
+  "diff": {
+   "n": 1,
+   "mean": 14.03,
+   "std": 0.0,
+   "median": 14.03,
+   "p10": 14.03,
+   "p90": 14.03
+  },
+  "best_cos": {
+   "n": 4,
+   "mean": 0.9483,
+   "std": 0.0879,
+   "median": 0.999,
+   "p10": 0.796,
+   "p90": 0.999
+  },
+  "cos_tech": {
+   "n": 4,
+   "mean": 0.2642,
+   "std": 0.307,
+   "median": 0.088,
+   "p10": 0.085,
+   "p90": 0.796
+  },
+  "cos_jack": {
+   "n": 4,
+   "mean": 0.7618,
+   "std": 0.4109,
+   "median": 0.999,
+   "p10": 0.05,
+   "p90": 0.999
+  },
+  "cos_speed": {
+   "n": 4,
+   "mean": 0.178,
+   "std": 0.2973,
+   "median": 0.007,
+   "p10": 0.005,
+   "p90": 0.693
+  },
+  "cos_stamina": {
+   "n": 4,
+   "mean": 0.783,
+   "std": 0.2823,
+   "median": 0.946,
+   "p10": 0.294,
+   "p90": 0.946
+  },
+  "pattern_vote": {
+   "jack": 3,
+   "speed": 1
+  },
+  "best_pack_vote": {
+   "jack": 3,
+   "tech": 1
+  },
+  "diff_missing": 3,
+  "n": 4
+ }
+}

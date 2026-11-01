@@ -1,0 +1,26 @@
+起点：ok 48 包（接受 48）/ 累计 799MB
+  [search] 'jumpstream' 50 候选 50 6s
+  [search] 'stream 4k' 50 候选 100 7s
+  [search] '4k dan' 0 候选 100 15s
+  [search] '4k mania' 50 候选 147 16s
+  [search] 'mania 4k' 0 候选 147 18s
+  [search] '4k stream' 50 候选 170 31s
+  [search] 'osu!mania 4k' 50 候选 215 37s
+  [search] '4k speed' 50 候选 260 52s
+  [search] 'stamina 4k' 0 候选 260 69s
+  [search] 'chordjack 4k' 0 候选 260 75s
+  [search] '4k tech' 50 候选 303 87s
+  [search] '4k vsrg' 0 候选 303 108s
+  [search] '4k insane' 50 候选 348 120s
+  [search] 'tech 4k' 0 候选 348 135s
+  [search] 'pattern 4k' 0 候选 348 141s
+  [search] 'density 4k' 0 候选 348 149s
+  [search] '4k double' 50 候选 396 150s
+  [search] '4k underjoy' 50 候选 446 155s
+  [search] '4k lv 20' 0 候选 446 175s
+  [search] '4k stamina' 0 候选 446 181s
+  [search] '4k expert' 0 候选 446 183s
+  [search] 'handstream' 0 候选 446 250s
+候选 446，可下 436
+
+  [fail] 1595301 404 无此 set

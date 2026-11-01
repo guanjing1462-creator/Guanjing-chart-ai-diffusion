@@ -1,0 +1,38 @@
+按风格缩放邻接强度：{'tech': 1.0, 'jack': 0.085, 'speed': 1.02, 'stamina': 0.2}
+线程 1（internop 1）
+数据 out/diff-data-grouped/dataset.npz：95574 窗口 × 4键 × 256 行（64 格的 mid 层）
+连续难度条件（占位率，train 拟合）：0.062–0.363 → [0,1]；train 均值 0.448 / val 均值 0.405
+组规模（train）：141 组，最大 32513 窗 / 中位 217 窗 / 最小 5 窗；前 3 组占 47% 窗口
+split 口径：train = split==0 → 87009 窗 / 2299 谱 / 141 组；val = split==1 → 5025 窗 / 148 谱 / 17 组；test = split==2 → 3540 窗（本次不碰）
+每个 epoch 从 train 无放回抽 8000 窗（共 87009）；val 用完整 5025 窗（不抽）
+  风格分布 train [14818, 29115, 11141, 31935]  val [1062, 867, 1028, 2068]
+  连续难度 [train min 0.00 max 1.00 均值 0.45] [val 均值 0.40]
+初始种子 0（配对实验用）
+参数量 0.440M（cond_dim=0）
+邻接加权 adj_weight=2.0 scope=row：val 正样本里成对格占 26.4%，全格平均损失权重 1.097（1.000 = 未加权 MSE）
+  按风格的平均损失权重：style0=1.160 / style1=1.004 / style2=1.180 / style3=1.009
+  本 epoch 抽到 8000 窗，覆盖 140 组，单组最多 108 窗（上限 300）；对照组规模最大 32513 窗
+epoch 1: 训练 0.1074  验证 0.0864（组均 0.0869）  用时 177s（250 batch，783ms/batch）
+  ↳ 保存最优（验证 0.0864）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 2: 训练 0.0886  验证 0.0791（组均 0.0793）  用时 165s（250 batch，667ms/batch）
+  ↳ 保存最优（验证 0.0791）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 3: 训练 0.0823  验证 0.0751（组均 0.0756）  用时 164s（250 batch，563ms/batch）
+  ↳ 保存最优（验证 0.0751）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 4: 训练 0.0802  验证 0.0737（组均 0.0744）  用时 164s（250 batch，576ms/batch）
+  ↳ 保存最优（验证 0.0737）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 5: 训练 0.0791  验证 0.0739（组均 0.0751）  用时 164s（250 batch，568ms/batch）
+epoch 6: 训练 0.0775  验证 0.0720（组均 0.0731）  用时 164s（250 batch，572ms/batch）
+  ↳ 保存最优（验证 0.0720）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 7: 训练 0.0766  验证 0.0712（组均 0.0725）  用时 164s（250 batch，564ms/batch）
+  ↳ 保存最优（验证 0.0712）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 8: 训练 0.0761  验证 0.0702（组均 0.0714）  用时 162s（250 batch，560ms/batch）
+  ↳ 保存最优（验证 0.0702）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2.pt
+epoch 9: 训练 0.0769  验证 0.0710（组均 0.0723）  用时 147s（250 batch，530ms/batch）
+
+=== A/B 泄漏量化（final epoch 权重）===
+  A split==1（无泄漏） 池化 0.0710 / 组均 0.0723   [5025 窗 / 17 组]
+  B split==0 抽样      池化 0.0716 / 组均 0.0712   [5025 窗 / 139 组]
+  差值 B-A（池化）      : +0.0006（相对 A +0.8%）
+  差值 B-A（组均）      : -0.0012
+末轮权重（未被 val 选过，无选择偏差）→ out/diffusion/round141-burst/style-a2/diffusion32-burst-style-a2-last.pt
+完成，最优验证损失 0.0702（epoch 8），总用时 1509s

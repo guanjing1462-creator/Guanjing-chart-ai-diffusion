@@ -1,0 +1,476 @@
+{
+ "meta": {
+  "script": "tools/eval-generated.py",
+  "label": "扩散-x0",
+  "n_charts": 2,
+  "pack_sample": null,
+  "seed": 0,
+  "elapsed_s": 0.1,
+  "centroids": {
+   "tech": {
+    "n": 19,
+    "probs": {
+     "tech": 0.2343,
+     "jack": 0.0471,
+     "speed": 0.4183,
+     "stamina": 0.2995,
+     "ln": 0.0008
+    },
+    "source": "/tmp/d_tech.json"
+   },
+   "jack": {
+    "n": 20,
+    "probs": {
+     "tech": 0.03,
+     "jack": 0.9355,
+     "speed": 0.0208,
+     "stamina": 0.0135,
+     "ln": 0.0001
+    },
+    "source": "/tmp/d_jack.json"
+   },
+   "speed": {
+    "n": 20,
+    "probs": {
+     "tech": 0.1792,
+     "jack": 0.0015,
+     "speed": 0.375,
+     "stamina": 0.4437,
+     "ln": 0.0004
+    },
+    "source": "/tmp/d_speed.json"
+   },
+   "stamina": {
+    "n": 19,
+    "probs": {
+     "tech": 0.0228,
+     "jack": 0.6569,
+     "speed": 0.1725,
+     "stamina": 0.1468,
+     "ln": 0.0006
+    },
+    "source": "/tmp/d_stamina.json"
+   }
+  },
+  "notes": [
+   "Koishi pattern 标签不可靠（人类谱自身一致率仅 42~45%），只看 probs/余弦与 diff",
+   "diff 为 null 表示 Koishi 判为低于 11 级（难度模型下限）",
+   "1/32 占比 = 行间隔落在 1/32 拍（±50%）的比例，按谱面 bpm 归一到 1/16 格计数",
+   "手位移 = 相邻行重心列索引差的绝对值均值（单位：列宽）",
+   "行重复率 = 8 行滑窗签名中「重复出现」的比例",
+   "可弹性冲突口径：同列 <55ms；单侧（0/1 或 2/3）55ms 内 ≥3 音；另给「单列最高频率 Hz」——1/16 网格(110ms)下 55ms 冲突不可能触发，只有 1/32 才有，所以 0 冲突不代表好弹，还要看单指要按多快"
+  ]
+ },
+ "charts": [
+  {
+   "file": "/tmp/evalsamp/diff-concat.osu",
+   "name": "diff-concat.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 617,
+   "rows": 400,
+   "bpm": 136.3,
+   "song": null,
+   "duration_s": 55.5,
+   "note_rate": 11.12,
+   "row_rate": 7.21,
+   "npr": 1.542,
+   "chord_rate": 0.505,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.857,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.865,
+    "3/16": 0.065,
+    "1/8": 0.045,
+    "1/4": 0.018,
+    ">=1/2": 0.008
+   },
+   "hand_shift": 0.429,
+   "repeat8": 0.031,
+   "occupancy": 0.3054,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 9.09,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": null,
+   "tier": "< Alpha Low",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.91,
+    "ln": 0.001,
+    "speed": 0.066,
+    "stamina": 0.013,
+    "tech": 0.01
+   },
+   "cos": {
+    "tech": 0.148,
+    "jack": 0.999,
+    "speed": 0.061,
+    "stamina": 0.964
+   },
+   "best_pack": "jack",
+   "best_cos": 0.999,
+   "group": "扩散-x0"
+  },
+  {
+   "file": "/tmp/evalsamp2/diff-concat-s1.osu",
+   "name": "diff-concat-s1.osu",
+   "title": "AI Diffusion 4K",
+   "version": "Diffusion Seed",
+   "notes": 605,
+   "rows": 400,
+   "bpm": 136.3,
+   "song": null,
+   "duration_s": 55.8,
+   "note_rate": 10.84,
+   "row_rate": 7.17,
+   "npr": 1.512,
+   "chord_rate": 0.463,
+   "ln_ratio": 0.0,
+   "jack_rate": 0.85,
+   "p132": 0.0,
+   "gap_hist": {
+    "1/16": 0.87,
+    "3/16": 0.043,
+    "1/8": 0.05,
+    "1/4": 0.018,
+    ">=1/2": 0.02
+   },
+   "hand_shift": 0.447,
+   "repeat8": 0.018,
+   "occupancy": 0.2977,
+   "fast_same_col": 0,
+   "side_overload": 0,
+   "conflicts": 0,
+   "conflicts_per_min": 0.0,
+   "max_col_hz": 9.09,
+   "align": {
+    "skipped": "谱面未关联 out/multisong 的 6 首歌（AudioFilename 无法匹配），踩音对齐不适用"
+   },
+   "diff": null,
+   "tier": "< Alpha Low",
+   "pattern": "jack",
+   "probs": {
+    "jack": 0.786,
+    "ln": 0.002,
+    "speed": 0.169,
+    "stamina": 0.025,
+    "tech": 0.017
+   },
+   "cos": {
+    "tech": 0.261,
+    "jack": 0.982,
+    "speed": 0.161,
+    "stamina": 0.982
+   },
+   "best_pack": "jack",
+   "best_cos": 0.982,
+   "group": "扩散-x0"
+  }
+ ],
+ "groups": {
+  "扩散-x0": {
+   "note_rate": {
+    "n": 2,
+    "mean": 10.98,
+    "std": 0.14,
+    "median": 10.98,
+    "p10": 10.84,
+    "p90": 11.12
+   },
+   "row_rate": {
+    "n": 2,
+    "mean": 7.19,
+    "std": 0.02,
+    "median": 7.19,
+    "p10": 7.17,
+    "p90": 7.21
+   },
+   "npr": {
+    "n": 2,
+    "mean": 1.527,
+    "std": 0.015,
+    "median": 1.527,
+    "p10": 1.512,
+    "p90": 1.542
+   },
+   "chord_rate": {
+    "n": 2,
+    "mean": 0.484,
+    "std": 0.021,
+    "median": 0.484,
+    "p10": 0.463,
+    "p90": 0.505
+   },
+   "ln_ratio": {
+    "n": 2,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "jack_rate": {
+    "n": 2,
+    "mean": 0.8535,
+    "std": 0.0035,
+    "median": 0.8535,
+    "p10": 0.85,
+    "p90": 0.857
+   },
+   "p132": {
+    "n": 2,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "hand_shift": {
+    "n": 2,
+    "mean": 0.438,
+    "std": 0.009,
+    "median": 0.438,
+    "p10": 0.429,
+    "p90": 0.447
+   },
+   "repeat8": {
+    "n": 2,
+    "mean": 0.0245,
+    "std": 0.0065,
+    "median": 0.0245,
+    "p10": 0.018,
+    "p90": 0.031
+   },
+   "occupancy": {
+    "n": 2,
+    "mean": 0.30155,
+    "std": 0.00385,
+    "median": 0.30155,
+    "p10": 0.2977,
+    "p90": 0.3054
+   },
+   "conflicts_per_min": {
+    "n": 2,
+    "mean": 0.0,
+    "std": 0.0,
+    "median": 0.0,
+    "p10": 0.0,
+    "p90": 0.0
+   },
+   "max_col_hz": {
+    "n": 2,
+    "mean": 9.09,
+    "std": 0.0,
+    "median": 9.09,
+    "p10": 9.09,
+    "p90": 9.09
+   },
+   "diff": {
+    "n": 0
+   },
+   "best_cos": {
+    "n": 2,
+    "mean": 0.9905,
+    "std": 0.0085,
+    "median": 0.9905,
+    "p10": 0.982,
+    "p90": 0.999
+   },
+   "cos_tech": {
+    "n": 2,
+    "mean": 0.2045,
+    "std": 0.0565,
+    "median": 0.2045,
+    "p10": 0.148,
+    "p90": 0.261
+   },
+   "cos_jack": {
+    "n": 2,
+    "mean": 0.9905,
+    "std": 0.0085,
+    "median": 0.9905,
+    "p10": 0.982,
+    "p90": 0.999
+   },
+   "cos_speed": {
+    "n": 2,
+    "mean": 0.111,
+    "std": 0.05,
+    "median": 0.111,
+    "p10": 0.061,
+    "p90": 0.161
+   },
+   "cos_stamina": {
+    "n": 2,
+    "mean": 0.973,
+    "std": 0.009,
+    "median": 0.973,
+    "p10": 0.964,
+    "p90": 0.982
+   },
+   "pattern_vote": {
+    "jack": 2
+   },
+   "best_pack_vote": {
+    "jack": 2
+   },
+   "diff_missing": 2,
+   "n": 2
+  }
+ },
+ "total": {
+  "note_rate": {
+   "n": 2,
+   "mean": 10.98,
+   "std": 0.14,
+   "median": 10.98,
+   "p10": 10.84,
+   "p90": 11.12
+  },
+  "row_rate": {
+   "n": 2,
+   "mean": 7.19,
+   "std": 0.02,
+   "median": 7.19,
+   "p10": 7.17,
+   "p90": 7.21
+  },
+  "npr": {
+   "n": 2,
+   "mean": 1.527,
+   "std": 0.015,
+   "median": 1.527,
+   "p10": 1.512,
+   "p90": 1.542
+  },
+  "chord_rate": {
+   "n": 2,
+   "mean": 0.484,
+   "std": 0.021,
+   "median": 0.484,
+   "p10": 0.463,
+   "p90": 0.505
+  },
+  "ln_ratio": {
+   "n": 2,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "jack_rate": {
+   "n": 2,
+   "mean": 0.8535,
+   "std": 0.0035,
+   "median": 0.8535,
+   "p10": 0.85,
+   "p90": 0.857
+  },
+  "p132": {
+   "n": 2,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "hand_shift": {
+   "n": 2,
+   "mean": 0.438,
+   "std": 0.009,
+   "median": 0.438,
+   "p10": 0.429,
+   "p90": 0.447
+  },
+  "repeat8": {
+   "n": 2,
+   "mean": 0.0245,
+   "std": 0.0065,
+   "median": 0.0245,
+   "p10": 0.018,
+   "p90": 0.031
+  },
+  "occupancy": {
+   "n": 2,
+   "mean": 0.30155,
+   "std": 0.00385,
+   "median": 0.30155,
+   "p10": 0.2977,
+   "p90": 0.3054
+  },
+  "conflicts_per_min": {
+   "n": 2,
+   "mean": 0.0,
+   "std": 0.0,
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "max_col_hz": {
+   "n": 2,
+   "mean": 9.09,
+   "std": 0.0,
+   "median": 9.09,
+   "p10": 9.09,
+   "p90": 9.09
+  },
+  "diff": {
+   "n": 0
+  },
+  "best_cos": {
+   "n": 2,
+   "mean": 0.9905,
+   "std": 0.0085,
+   "median": 0.9905,
+   "p10": 0.982,
+   "p90": 0.999
+  },
+  "cos_tech": {
+   "n": 2,
+   "mean": 0.2045,
+   "std": 0.0565,
+   "median": 0.2045,
+   "p10": 0.148,
+   "p90": 0.261
+  },
+  "cos_jack": {
+   "n": 2,
+   "mean": 0.9905,
+   "std": 0.0085,
+   "median": 0.9905,
+   "p10": 0.982,
+   "p90": 0.999
+  },
+  "cos_speed": {
+   "n": 2,
+   "mean": 0.111,
+   "std": 0.05,
+   "median": 0.111,
+   "p10": 0.061,
+   "p90": 0.161
+  },
+  "cos_stamina": {
+   "n": 2,
+   "mean": 0.973,
+   "std": 0.009,
+   "median": 0.973,
+   "p10": 0.964,
+   "p90": 0.982
+  },
+  "pattern_vote": {
+   "jack": 2
+  },
+  "best_pack_vote": {
+   "jack": 2
+  },
+  "diff_missing": 2,
+  "n": 2
+ }
+}
